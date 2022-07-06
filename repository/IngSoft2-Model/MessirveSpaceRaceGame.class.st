@@ -26,23 +26,32 @@ MessirveSpaceRaceGame class >> assertPlayerNameNotDuplicated: spaceShips [
 		Error signal: 'SpaceShip name duplicated' ]
 ]
 
+{ #category : #asserting }
+MessirveSpaceRaceGame class >> assertValidLapsOf: anInteger [
+
+	anInteger > 1 ifFalse: [ 
+		Error signal: 'Laps must be greater than one' ]
+]
+
 { #category : #'as yet unclassified' }
 MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup withLapsToWin: anAmountOfLaps [
 
-    self assertPlayerNameNotDuplicated: spaceShips.
+	self assertPlayerNameNotDuplicated: spaceShips.
+	self assertValidLapsOf: anAmountOfLaps.
 
-    ^ self new
-          initiallizePlayedBy: spaceShips
-          on: aBoard
-          rolling: aDiceCup
-          withLapsToWin: anAmountOfLaps
-          handing: self randomlyDistributedDeck
+	^ self new
+		  initiallizePlayedBy: spaceShips
+		  on: aBoard
+		  rolling: aDiceCup
+		  withLapsToWin: anAmountOfLaps
+		  handing: self randomlyDistributedDeck
 ]
 
 { #category : #initialization }
 MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup withLapsToWin: anAmountOfLaps handing: cards [
 
 	self assertPlayerNameNotDuplicated: spaceShips.
+	self assertValidLapsOf: anAmountOfLaps. 
 	^ self new
 		  initiallizePlayedBy: spaceShips
 		  on: aBoard
