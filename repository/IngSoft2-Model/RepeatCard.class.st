@@ -13,8 +13,8 @@ RepeatCard >> activatedTo: aTarget poweredBy: anEnginePowerApplicator on: aCardA
 { #category : #asserting }
 RepeatCard >> handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
 
-	aCardApplicator assertSpaceShip: cardPlayer owns: self.
-	aCardApplicator makeLastPlayed: self
+	aCardApplicator handleInstantaneousOf: self.
+
 ]
 
 { #category : #private }

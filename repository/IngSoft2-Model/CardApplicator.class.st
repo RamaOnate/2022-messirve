@@ -118,6 +118,33 @@ CardApplicator >> enginePowerOf: aSpaceShip [
 	^engineApplicator powerOf: aSpaceShip 
 ]
 
+{ #category : #'as yet unclassified' }
+CardApplicator >> handleCancellationOf: aCancellation to: cardTarget [
+
+	self assertThereAreActiveCardsInPlay.
+	self assertCardIsActive: cardTarget.
+	self handleInstantaneousOf: aCancellation
+]
+
+{ #category : #'as yet unclassified' }
+CardApplicator >> handleInstantaneousOf: aCard [ 
+
+	self makeLastPlayed: aCard
+]
+
+{ #category : #'as yet unclassified' }
+CardApplicator >> handlePermanentPlayOf: aCard from: cardPlayer on: aGame [
+
+	aGame assertPermanentPlayedOnCorrectlyBy: cardPlayer.
+	self makeLastPlayed: aCard
+]
+
+{ #category : #'as yet unclassified' }
+CardApplicator >> handleRedoFrom: cardPlayer in: aGame [
+
+	aGame assertPermanentPlayedOnCorrectlyBy: cardPlayer
+]
+
 { #category : #initialization }
 CardApplicator >> initializeHanding: someCards to: spaceShips [
 
@@ -180,6 +207,7 @@ CardApplicator >> remove: aCard from: cardPlayer [
 { #category : #private }
 CardApplicator >> spaceShip: cardPlayer plays: aCard on: cardTarget from: aGame [
 
+	self assertSpaceShip: cardPlayer owns: aCard.
 	aCard handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: self from: aGame.
 
 	self remove: aCard from: cardPlayer.

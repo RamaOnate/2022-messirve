@@ -1,6 +1,6 @@
 Class {
 	#name : #SpeedCard,
-	#superclass : #PermanentCard,
+	#superclass : #Object,
 	#category : #'IngSoft2-Model'
 }
 
@@ -14,6 +14,15 @@ SpeedCard >> activatedTo: aSpaceShip poweredBy: anEnginePowerApplicator on: aCar
 SpeedCard >> applyNegatedOn: aSpaceShip on: anEnginePowerApplicator from: aRoundBoard [ 
 
 	anEnginePowerApplicator powerEngineOf: aSpaceShip by: -1
+]
+
+{ #category : #asserting }
+SpeedCard >> handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
+
+	aCardApplicator
+		handlePermanentPlayOf: self
+		from: cardPlayer
+		on: aGame
 ]
 
 { #category : #private }

@@ -13,18 +13,9 @@ CancellationCard >> activatedTo: aCard poweredBy: anEnginePowerApplicator on: aC
 ]
 
 { #category : #private }
-CancellationCard >> assertCanBePlayedOnTurnOf: cardPlayer from: aMessirveSpaceRaceGame [ 
-	
-	^ self
-]
-
-{ #category : #private }
 CancellationCard >> handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
 
-	aCardApplicator assertSpaceShip: cardPlayer owns: self.
-	aCardApplicator assertThereAreActiveCardsInPlay.
-	aCardApplicator assertCardIsActive: cardTarget.
-	aCardApplicator makeLastPlayed: self
+	aCardApplicator handleCancellationOf: self to: cardTarget
 ]
 
 { #category : #private }

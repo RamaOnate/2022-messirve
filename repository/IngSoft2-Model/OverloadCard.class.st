@@ -1,6 +1,6 @@
 Class {
 	#name : #OverloadCard,
-	#superclass : #PermanentCard,
+	#superclass : #Object,
 	#category : #'IngSoft2-Model'
 }
 
@@ -14,6 +14,15 @@ OverloadCard >> activatedTo: aSpaceShip poweredBy: anEnginePowerApplicator on: a
 OverloadCard >> applyNegatedOn: aSpaceShip on: anEnginePowerApplicator from: aRoundBoard [
 
 	anEnginePowerApplicator powerEngineOf: aSpaceShip by: 2
+]
+
+{ #category : #asserting }
+OverloadCard >> handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
+
+	aCardApplicator
+		handlePermanentPlayOf: self
+		from: cardPlayer
+		on: aGame
 ]
 
 { #category : #private }
