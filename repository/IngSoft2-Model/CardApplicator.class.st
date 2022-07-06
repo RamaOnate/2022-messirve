@@ -66,12 +66,12 @@ CardApplicator >> assertCardIsActive: aCard [
 { #category : #asserting }
 CardApplicator >> assertSpaceShip: aSpaceShip owns: aCard [
 
-	| spaceShipInventory cardExists |
+	| spaceShipInventory |
 	spaceShipInventory := inventories detect: [ :inventory | 
 		                      inventory spaceShip = aSpaceShip ].
-	cardExists := spaceShipInventory inventory anySatisfy: [ :card | 
-		              card == aCard ].
-	cardExists ifFalse: [ Error signal: 'SpaceShip doesnt own that card' ]
+
+	(spaceShipInventory includes: aCard) ifFalse: [ 
+		Error signal: 'SpaceShip doesnt own that card' ]
 ]
 
 { #category : #asserting }
@@ -90,7 +90,7 @@ CardApplicator >> assertThereAreActiveCardsInPlay [
 CardApplicator >> cardsInInventoryOf: aSpaceShip [
 
 	^ (inventories detect: [ :inventory | 
-		   inventory spaceShip = aSpaceShip ]) inventory
+		   inventory spaceShip = aSpaceShip ]) deck
 ]
 
 { #category : #private }
@@ -107,7 +107,7 @@ CardApplicator >> distribute: aCard toTheInventoryOf: aSpaceShip [
 CardApplicator >> distributeInitialCardsTo: spaceShipNames [
 
 	inventories := spaceShipNames collect: [ :spaceShip | 
-		               SpaceShipInventory carriedBy: spaceShip ].
+		               SpaceShipCardInventory carriedBy: spaceShip ].
 
 	inventories := cardDealer inventoriesAfterDrawingTwoFrom: inventories
 ]
@@ -201,7 +201,7 @@ CardApplicator >> remove: aCard from: cardPlayer [
 	| inventoryOfCardPlayer |
 	inventoryOfCardPlayer := inventories detect: [ :inventory | 
 		                         inventory spaceShip == cardPlayer ].
-	inventoryOfCardPlayer removeFromInventory: aCard
+	inventoryOfCardPlayer remove: aCard
 ]
 
 { #category : #private }

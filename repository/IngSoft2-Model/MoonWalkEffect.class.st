@@ -14,6 +14,12 @@ MoonWalkEffect class >> assertValidPositionsGoingBackOf: anAmountOfPositions [
 		Error signal: 'Amount of back positions must be higher than 0' ]
 ]
 
+{ #category : #initialization }
+MoonWalkEffect class >> createTakingBack: anAmountOfPositions [
+
+	^ self new initializeTakingBack: anAmountOfPositions
+]
+
 { #category : #calculating }
 MoonWalkEffect class >> obtainRandomTakingBackBetween: start and: end [
 
@@ -38,15 +44,14 @@ MoonWalkEffect class >> randomlyDistributed [
 	takingBackBetweenOneAndTen := self
 		                              obtainRandomTakingBackBetween: 1
 		                              and: 10.
-
-	^ self new initializeTakingBack: (takingBackBetweenOneAndTen at: 1)
+	^ self createTakingBack: (takingBackBetweenOneAndTen at: 1)
 ]
 
 { #category : #initialization }
 MoonWalkEffect class >> takingBack: anAmountOfPositions [
 
 	self assertValidPositionsGoingBackOf: anAmountOfPositions.
-	^ self new initializeTakingBack: anAmountOfPositions
+	^ self createTakingBack: anAmountOfPositions
 ]
 
 { #category : #private }

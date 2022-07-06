@@ -8,9 +8,15 @@ Class {
 }
 
 { #category : #initialization }
-CardDealerEffect class >> handing: aCard [
+CardDealerEffect class >> createHanding: aCard [
 
 	^ self new initializeHanding: { aCard }
+]
+
+{ #category : #initialization }
+CardDealerEffect class >> handing: aCard [
+
+	^ self createHanding: aCard
 ]
 
 { #category : #'as yet unclassified' }

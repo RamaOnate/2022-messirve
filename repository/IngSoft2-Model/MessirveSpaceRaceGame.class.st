@@ -33,14 +33,24 @@ MessirveSpaceRaceGame class >> assertValidLapsOf: anInteger [
 		Error signal: 'Laps must be greater than one' ]
 ]
 
+{ #category : #initialization }
+MessirveSpaceRaceGame class >> createPlayedBy: spaceShips on: aBoard rolling: aDiceCup withLapsToWin: anAmountOfLaps handing: cards [
+
+	^ self new
+		  initiallizePlayedBy: spaceShips
+		  on: aBoard
+		  rolling: aDiceCup
+		  withLapsToWin: anAmountOfLaps
+		  handing: cards
+]
+
 { #category : #'as yet unclassified' }
 MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup withLapsToWin: anAmountOfLaps [
 
 	self assertPlayerNameNotDuplicated: spaceShips.
 	self assertValidLapsOf: anAmountOfLaps.
-
-	^ self new
-		  initiallizePlayedBy: spaceShips
+	^ self
+		  createPlayedBy: spaceShips
 		  on: aBoard
 		  rolling: aDiceCup
 		  withLapsToWin: anAmountOfLaps
@@ -51,9 +61,9 @@ MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup
 MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup withLapsToWin: anAmountOfLaps handing: cards [
 
 	self assertPlayerNameNotDuplicated: spaceShips.
-	self assertValidLapsOf: anAmountOfLaps. 
-	^ self new
-		  initiallizePlayedBy: spaceShips
+	self assertValidLapsOf: anAmountOfLaps.
+	^ self
+		  createPlayedBy: spaceShips
 		  on: aBoard
 		  rolling: aDiceCup
 		  withLapsToWin: anAmountOfLaps

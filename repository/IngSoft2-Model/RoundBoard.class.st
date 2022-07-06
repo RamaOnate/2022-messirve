@@ -31,12 +31,19 @@ RoundBoard class >> boardWithOnly: effectPositions at: effectTileNumbers Of: num
 
 	| boardPositions |
 	self assertValidNumberOfPositions: numberOfPositions.
-
 	boardPositions := self noEffectPositionBoardWith: numberOfPositions.
 	1 to: effectTileNumbers size do: [ :i | 
 		boardPositions
 			at: (effectTileNumbers at: i)
 			put: (effectPositions at: i) ].
+	^ self
+		  createSome: boardPositions
+		  With: aNumberOfParsecs
+		  and: aNumberOfLightyears
+]
+
+{ #category : #'instance creation' }
+RoundBoard class >> createSome: boardPositions With: aNumberOfParsecs and: aNumberOfLightyears [
 
 	^ self new
 		  initializeSome: boardPositions
@@ -58,16 +65,14 @@ RoundBoard class >> with: numberOfPositions on: aNumberOfParsecs and: aNumberOfL
 
 	| defaultBoardPositions boardRandomizer |
 	self assertValidNumberOfPositions: numberOfPositions.
-
 	boardRandomizer := BoardRandomizer new.
-
 	defaultBoardPositions := boardRandomizer 
 		                         assignDistributedBoardPositionsAdaptedTo:
 		                         numberOfPositions.
 	self assertValidBoardPositions: defaultBoardPositions.
-	^ self new
-		  initializeSome: defaultBoardPositions
-		  with: aNumberOfParsecs
+	^ self
+		  createSome: defaultBoardPositions
+		  With: aNumberOfParsecs
 		  and: aNumberOfLightYears
 ]
 
@@ -76,11 +81,10 @@ RoundBoard class >> withNoEffectsOf: numberOfPositions with: aNumberOfParsecs an
 
 	| boardPositions |
 	self assertValidNumberOfPositions: numberOfPositions.
-
 	boardPositions := self noEffectPositionBoardWith: numberOfPositions.
-	^ self new
-		  initializeSome: boardPositions
-		  with: aNumberOfParsecs
+	^ self
+		  createSome: boardPositions
+		  With: aNumberOfParsecs
 		  and: aNumberOfLightYears
 ]
 
