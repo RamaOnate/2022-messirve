@@ -15,6 +15,30 @@ ObjectCreationTests >> testADieCannotHaveLessThanThreeSides [
 ]
 
 { #category : #tests }
+ObjectCreationTests >> testAGameCannotBePlayedWithLessThanTwoLaps [
+
+	| aLoadedDie1 aLoadedDie2 aDiceCup aBoard |
+	aLoadedDie1 := LoadedDie rolling: { 3 }.
+	aLoadedDie2 := LoadedDie rolling: { 4 }.
+	aDiceCup := DiceCup withAll: { 
+			            aLoadedDie1.
+			            aLoadedDie2 }.
+	aBoard := RoundBoard withNoEffectsOf: 6 with: 100 and: 0.
+
+	self
+		should: [ 
+			MessirveSpaceRaceGame
+				playedBy: { 'Messi'. 'De Paul' }
+				on: aBoard
+				rolling: aDiceCup
+				withLapsToWin: 1
+				handing: { SpeedCard new } ]
+		raise: Error
+		whoseDescriptionIncludes: 'Laps must be greater than one'
+		description: 'Laps must be two or higher for game to start'
+]
+
+{ #category : #tests }
 ObjectCreationTests >> testAMoonWalkBoardPositionCannotHaveAnNLowerThanOne [
 
 	self
@@ -46,7 +70,7 @@ ObjectCreationTests >> testASpaceShipBeginsInPositionOne [
 		              playedBy: { 'Messi' }
 		              on: aBoard
 		              rolling: ''
-		              withLapsToWin: 1
+		              withLapsToWin: 2
 		              handing: { SpeedCard new }.
 
 	self
@@ -65,7 +89,7 @@ ObjectCreationTests >> testSpaceShipsPlayingBeginAtLapOne [
 		              playedBy: { 'Messi'. 'De Paul' }
 		              on: aBoard
 		              rolling: ''
-		              withLapsToWin: 1
+		              withLapsToWin: 2
 		              handing: { SpeedCard new }.
 
 	self

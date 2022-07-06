@@ -210,7 +210,7 @@ LoadedDieGameplayTests >> testTheGameFinishesWhenASpaceShipGoesThroughTheFinishL
 		              playedBy: { 'Messi' }
 		              on: aBoard
 		              rolling: aLoadedDie
-		              withLapsToWin: 1
+		              withLapsToWin: 2
 		              handing: { SpeedCard new }.
 	aSpaceGame playNextTurn.
 
@@ -267,7 +267,7 @@ LoadedDieGameplayTests >> testTwoSpaceShipsPlayTheGameAndMessiComesFirst [
 		              playedBy: { 'Messi'. 'De Paul' }
 		              on: aBoard
 		              rolling: aLoadedDie
-		              withLapsToWin: 1
+		              withLapsToWin: 2
 		              handing: { SpeedCard new }.
 	aSpaceGame playGame.
 
@@ -289,7 +289,7 @@ LoadedDieGameplayTests >> testTwoSpaceShipsPlayTheGameWithTwoDiceAndTheGameFinis
 		              playedBy: { 'Messi'. 'De Paul' }
 		              on: aBoard
 		              rolling: aDiceCup
-		              withLapsToWin: 1
+		              withLapsToWin: 2
 		              handing: { SpeedCard new }.
 	aSpaceGame playGame.
 
