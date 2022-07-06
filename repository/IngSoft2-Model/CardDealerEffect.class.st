@@ -1,6 +1,6 @@
 Class {
 	#name : #CardDealerEffect,
-	#superclass : #Object,
+	#superclass : #BoardEffect,
 	#instVars : [
 		'card'
 	],

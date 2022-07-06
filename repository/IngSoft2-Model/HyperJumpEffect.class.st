@@ -1,9 +1,9 @@
 Class {
 	#name : #HyperJumpEffect,
-	#superclass : #Object,
+	#superclass : #BoardEffect,
 	#instVars : [
 		'sequence',
-		'distanceUnits'
+		'distances'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -33,7 +33,7 @@ HyperJumpEffect class >> with: someParsecs and: someLightyears [
 HyperJumpEffect >> applyOn: statuses activatedBy: aStatus playedOn: aBoard and: aGame appliedBy: effectApplicator [
 
 	| aDistance |
-	aDistance := distanceUnits at: sequence currentSequenceNumber.
+	aDistance := distances at: sequence currentSequenceNumber.
 	sequence next.
 
 	^ effectApplicator
@@ -47,6 +47,6 @@ HyperJumpEffect >> applyOn: statuses activatedBy: aStatus playedOn: aBoard and: 
 { #category : #initialization }
 HyperJumpEffect >> initializeWith: someDistanceUnits [
 
-	distanceUnits := someDistanceUnits.
-	sequence := Sequence formedBy: distanceUnits.
+	distances := someDistanceUnits.
+	sequence := Sequence formedBy: distances.
 ]

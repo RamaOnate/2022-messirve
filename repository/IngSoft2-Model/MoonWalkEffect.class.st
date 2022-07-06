@@ -1,6 +1,6 @@
 Class {
 	#name : #MoonWalkEffect,
-	#superclass : #Object,
+	#superclass : #BoardEffect,
 	#instVars : [
 		'backwardPositions'
 	],
