@@ -118,16 +118,6 @@ RoundBoard >> initializeSome: boardPositions with: aDistance [
 	lastEffectApplied := {  }
 ]
 
-{ #category : #initialization }
-RoundBoard >> initializeSome: boardPositions with: anAmountOfParsecs and: anAmountOfLightYears [ 
-
-	startingPosition := 1.
-	boardEffects := boardPositions asOrderedCollection.
-	lastPosition := boardPositions size.
-	distance := SpaceGameDistanceUnit with: anAmountOfParsecs and: anAmountOfLightYears.
-	lastEffectApplied := {  }
-]
-
 { #category : #private }
 RoundBoard >> lapAfter: newDistanceTravelled [
 
