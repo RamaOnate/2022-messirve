@@ -67,7 +67,7 @@ RoundBoard class >> with: numberOfPositions on: aNumberOfParsecs and: aNumberOfL
 	self assertValidNumberOfPositions: numberOfPositions.
 	boardRandomizer := BoardRandomizer new.
 	defaultBoardPositions := boardRandomizer 
-		                         assignDistributedBoardPositionsAdaptedTo:
+		                         assignDistributedBoardOf:
 		                         numberOfPositions.
 	self assertValidBoardPositions: defaultBoardPositions.
 	^ self

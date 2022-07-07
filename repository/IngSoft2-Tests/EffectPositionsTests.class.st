@@ -263,8 +263,10 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAfterAnotherSpace
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
-		          { (HyperJumpEffect with: { 30. 20. 10 } and: { 0. 0. 0 }) }
+		          boardWithOnly: { (HyperJumpEffect withAll: { 
+					           (ParsecMeasure of: 30).
+					           (LightYearMeasure of: 60).
+					           (ParsecMeasure of: 10) }) }
 		          at: { 2 }
 		          Of: 10
 		          with: 100
@@ -300,8 +302,10 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAfterAnotherSpace
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
-		          { (HyperJumpEffect with: { 25. 15. 5 } and: { 15. 15. 15 }) }
+		          boardWithOnly: { (HyperJumpEffect withAll: { 
+					           (ParsecMeasure of: 30).
+					           (LightYearMeasure of: 60).
+					           (LightYearMeasure of: 30) }) }
 		          at: { 2 }
 		          Of: 10
 		          with: 100
@@ -337,8 +341,10 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAndAdvancesThirty
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
-		          { (HyperJumpEffect with: { 30. 20. 10 } and: { 0. 0. 0 }) }
+		          boardWithOnly: { (HyperJumpEffect withAll: { 
+					           (ParsecMeasure of: 30).
+					           (LightYearMeasure of: 40).
+					           (LightYearMeasure of: 30) }) }
 		          at: { 2 }
 		          Of: 10
 		          with: 100
@@ -368,7 +374,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionButTheParsecsAwar
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
 		          boardWithOnly:
-		          { (HyperJumpEffect with: { 3 } and: { 0 }) }
+		          { (HyperJumpEffect withAll: { (LightYearMeasure of: 15) }) }
 		          at: { 2 }
 		          Of: 10
 		          with: 100
@@ -398,7 +404,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionThatMovesItForwar
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
 		          boardWithOnly:
-		          { (HyperJumpEffect with: { 10 } and: { 0 }) }
+		          { (HyperJumpEffect withAll: { (ParsecMeasure of: 10) }) }
 		          at: { 10 }
 		          Of: 10
 		          with: 100
@@ -554,8 +560,10 @@ EffectPositionsTests >> testSpaceShipsLandOnHyperJumpPositionFourTimesAndTheLast
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
-		          { (HyperJumpEffect with: { 30. 20. 10 } and: { 0. 0. 0 }) }
+		          boardWithOnly: { (HyperJumpEffect withAll: { 
+					           (ParsecMeasure of: 30).
+					           (LightYearMeasure of: 60).
+					           (LightYearMeasure of: 30) }) }
 		          at: { 2 }
 		          Of: 10
 		          with: 100

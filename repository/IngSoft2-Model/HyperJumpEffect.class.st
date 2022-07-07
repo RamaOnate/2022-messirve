@@ -16,17 +16,10 @@ HyperJumpEffect class >> assertValid: someParsecs and: someLightyears [
 			'Parsec and lightyear collection must have the same size' ]
 ]
 
-{ #category : #initialization }
-HyperJumpEffect class >> with: someParsecs and: someLightyears [
+{ #category : #'instance creation' }
+HyperJumpEffect class >> withAll: someDistances [ 
 
-	| distanceUnits |
-	self assertValid: someParsecs and: someLightyears.
-	distanceUnits := OrderedCollection new.
-	1 to: someParsecs size do: [ :i | 
-		distanceUnits add: (SpaceGameDistanceUnit
-				 with: (someParsecs at: i)
-				 and: (someLightyears at: i)) ].
-	^ self new initializeWith: distanceUnits
+	^ self new initializeWith: someDistances
 ]
 
 { #category : #private }
