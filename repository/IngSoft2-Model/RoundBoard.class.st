@@ -7,7 +7,7 @@ Class {
 		'lastPosition',
 		'parsecs',
 		'lastEffectApplied',
-		'distanceUnit'
+		'distance'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -26,8 +26,8 @@ RoundBoard class >> assertValidNumberOfPositions: numberOfPositions [
 		Error signal: 'A board cannot have less than two positions' ]
 ]
 
-{ #category : #'instance creation' }
-RoundBoard class >> boardWithOnly: effectPositions at: effectTileNumbers Of: numberOfPositions with: aNumberOfParsecs and: aNumberOfLightyears [
+{ #category : #'as yet unclassified' }
+RoundBoard class >> boardWithOnly: effectPositions at: effectTileNumbers Of: numberOfPositions with: aDistance [
 
 	| boardPositions |
 	self assertValidNumberOfPositions: numberOfPositions.
@@ -36,19 +36,15 @@ RoundBoard class >> boardWithOnly: effectPositions at: effectTileNumbers Of: num
 		boardPositions
 			at: (effectTileNumbers at: i)
 			put: (effectPositions at: i) ].
-	^ self
-		  createSome: boardPositions
-		  With: aNumberOfParsecs
-		  and: aNumberOfLightyears
+	^ self createSome: boardPositions with: aDistance
 ]
 
 { #category : #'instance creation' }
-RoundBoard class >> createSome: boardPositions With: aNumberOfParsecs and: aNumberOfLightyears [
+RoundBoard class >> createSome: boardPositions with: aDistance [
 
 	^ self new
 		  initializeSome: boardPositions
-		  with: aNumberOfParsecs
-		  and: aNumberOfLightyears
+		  with: aDistance
 ]
 
 { #category : #verification }
@@ -60,32 +56,25 @@ RoundBoard class >> noEffectPositionBoardWith: numberOfTiles [
 	^ boardPositions
 ]
 
-{ #category : #'instance creation' }
-RoundBoard class >> with: numberOfPositions on: aNumberOfParsecs and: aNumberOfLightYears [
+{ #category : #'as yet unclassified' }
+RoundBoard class >> with: numberOfPositions on: aDistance [
 
 	| defaultBoardPositions boardRandomizer |
 	self assertValidNumberOfPositions: numberOfPositions.
 	boardRandomizer := BoardRandomizer new.
-	defaultBoardPositions := boardRandomizer 
-		                         assignDistributedBoardOf:
+	defaultBoardPositions := boardRandomizer assignDistributedBoardOf:
 		                         numberOfPositions.
 	self assertValidBoardPositions: defaultBoardPositions.
-	^ self
-		  createSome: defaultBoardPositions
-		  With: aNumberOfParsecs
-		  and: aNumberOfLightYears
+	^ self createSome: defaultBoardPositions with: aDistance
 ]
 
-{ #category : #'instance creation' }
-RoundBoard class >> withNoEffectsOf: numberOfPositions with: aNumberOfParsecs and: aNumberOfLightYears [
+{ #category : #'as yet unclassified' }
+RoundBoard class >> withNoEffectsOf: numberOfPositions with: aDistance [
 
 	| boardPositions |
 	self assertValidNumberOfPositions: numberOfPositions.
 	boardPositions := self noEffectPositionBoardWith: numberOfPositions.
-	^ self
-		  createSome: boardPositions
-		  With: aNumberOfParsecs
-		  and: aNumberOfLightYears
+	^ self createSome: boardPositions with: aDistance
 ]
 
 { #category : #private }
@@ -120,12 +109,22 @@ RoundBoard >> effectAppliedOnPosition: aPosition [
 ]
 
 { #category : #initialization }
+RoundBoard >> initializeSome: boardPositions with: aDistance [
+
+	startingPosition := 1.
+	boardEffects := boardPositions asOrderedCollection.
+	lastPosition := boardPositions size.
+	distance := aDistance.
+	lastEffectApplied := {  }
+]
+
+{ #category : #initialization }
 RoundBoard >> initializeSome: boardPositions with: anAmountOfParsecs and: anAmountOfLightYears [ 
 
 	startingPosition := 1.
 	boardEffects := boardPositions asOrderedCollection.
 	lastPosition := boardPositions size.
-	distanceUnit := SpaceGameDistanceUnit with: anAmountOfParsecs and: anAmountOfLightYears.
+	distance := SpaceGameDistanceUnit with: anAmountOfParsecs and: anAmountOfLightYears.
 	lastEffectApplied := {  }
 ]
 
@@ -202,7 +201,7 @@ RoundBoard >> newStatusesFrom: statuses afterA: diceRoll from: rollingStatus on:
 { #category : #accessing }
 RoundBoard >> parsecsPerPosition [
 
-	^ (distanceUnit totalParsecs) / lastPosition
+	^ (distance totalParsecs) / lastPosition
 ]
 
 { #category : #accessing }
