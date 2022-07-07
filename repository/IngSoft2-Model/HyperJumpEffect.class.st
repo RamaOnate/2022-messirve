@@ -8,14 +8,6 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #asserting }
-HyperJumpEffect class >> assertValid: someParsecs and: someLightyears [
-
-	someParsecs size = someLightyears size ifFalse: [ 
-		Error signal:
-			'Parsec and lightyear collection must have the same size' ]
-]
-
 { #category : #'instance creation' }
 HyperJumpEffect class >> withAll: someDistances [ 
 
