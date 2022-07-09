@@ -23,7 +23,7 @@ ObjectCreationTests >> testAGameCannotBePlayedWithLessThanTwoLaps [
 	aDiceCup := DiceCup withAll: { 
 			            aLoadedDie1.
 			            aLoadedDie2 }.
-	aBoard := RoundBoard withNoEffectsOf: 6 with: 100.
+	aBoard := RoundBoard withNoEffectsOf: 6.
 
 	self
 		should: [ 

@@ -16,17 +16,17 @@ OverloadCard >> applyNegatedOn: aSpaceShip on: anEnginePowerApplicator from: aRo
 	anEnginePowerApplicator powerEngineOf: aSpaceShip by: 2
 ]
 
+{ #category : #private }
+OverloadCard >> inventoriesAfterTargeting: cardTarget from: inventories on: aCardApplicator [
+
+	^ aCardApplicator inventoriesAfter: cardTarget wasApplied: self
+]
+
 { #category : #asserting }
-OverloadCard >> handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
+OverloadCard >> playOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
 
 	aCardApplicator
 		handlePermanentPlayOf: self
 		from: cardPlayer
 		on: aGame
-]
-
-{ #category : #private }
-OverloadCard >> inventoriesAfterTargeting: cardTarget from: inventories on: aCardApplicator [
-
-	^ aCardApplicator inventoriesAfter: cardTarget wasApplied: self
 ]

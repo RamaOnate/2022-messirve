@@ -14,12 +14,6 @@ RedoCard >> activatedTo: aCard poweredBy: anEnginePowerApplicator on: aCardAppli
 		from: aGame
 ]
 
-{ #category : #asserting }
-RedoCard >> handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
-
-	aCardApplicator handleRedoFrom: cardPlayer in: aGame
-]
-
 { #category : #private }
 RedoCard >> inventoriesAfterTargeting: target from: inventories on: aBoard [
 
@@ -27,4 +21,10 @@ RedoCard >> inventoriesAfterTargeting: target from: inventories on: aBoard [
 		  inventoriesAfterTargeting: target
 		  from: inventories
 		  on: aBoard
+]
+
+{ #category : #asserting }
+RedoCard >> playOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
+
+	aCardApplicator handleRedoFrom: cardPlayer in: aGame
 ]

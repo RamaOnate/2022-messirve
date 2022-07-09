@@ -19,7 +19,7 @@ CardDealerEffect class >> handing: aCard [
 	^ self createHanding: aCard
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 CardDealerEffect class >> handingRandomCards [
 
 	^ self new initializeHanding: { CancellationCard new . AccelerationCard new . OverloadCard new . SpeedCard new . RedoCard new . RepeatCard new }

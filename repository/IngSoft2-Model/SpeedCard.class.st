@@ -16,17 +16,17 @@ SpeedCard >> applyNegatedOn: aSpaceShip on: anEnginePowerApplicator from: aRound
 	anEnginePowerApplicator powerEngineOf: aSpaceShip by: -1
 ]
 
+{ #category : #private }
+SpeedCard >> inventoriesAfterTargeting: cardTarget from: inventories on: aCardApplicator [
+
+	^ aCardApplicator inventoriesAfter: cardTarget wasApplied: self
+]
+
 { #category : #asserting }
-SpeedCard >> handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
+SpeedCard >> playOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
 
 	aCardApplicator
 		handlePermanentPlayOf: self
 		from: cardPlayer
 		on: aGame
-]
-
-{ #category : #private }
-SpeedCard >> inventoriesAfterTargeting: cardTarget from: inventories on: aCardApplicator [
-
-	^ aCardApplicator inventoriesAfter: cardTarget wasApplied: self
 ]

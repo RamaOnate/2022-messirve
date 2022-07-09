@@ -34,8 +34,7 @@ CardTests >> testASpaceShipCannotPlayACancellationCardOnAnotherCancellationCard 
 		          boardWithOnly:
 		          { (CardDealerEffect handing: cancellationCardTwo) }
 		          at: { 3 }
-		          Of: 5
-		          with: 100.
+		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
@@ -94,8 +93,7 @@ CardTests >> testASpaceShipCannotPlayARedoCardOnASpeedCardDuringATurnThatIsNotTh
 	aBoard := RoundBoard
 		          boardWithOnly: { SpeedUpEffect new }
 		          at: { 2 }
-		          Of: 5
-		          with: 100.
+		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi'. 'Armani' }
 		              on: aBoard
@@ -129,8 +127,7 @@ CardTests >> testASpaceShipLandsOnAPositionHandingASpeedCardAndNowHasThreeCards 
 	aBoard := RoundBoard
 		          boardWithOnly: { (CardDealerEffect handing: speedCard) }
 		          at: { 2 }
-		          Of: 5
-		          with: 100.
+		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
@@ -157,8 +154,7 @@ CardTests >> testASpaceShipLandsOnAPositionHandingASpeedCardTwiceAndNowHasFourCa
 				          (CardDealerEffect handing: speedCard).
 				          (CardDealerEffect handing: speedCard) }
 		          at: { 2. 3 }
-		          Of: 5
-		          with: 100.
+		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
@@ -187,8 +183,7 @@ CardTests >> testASpaceShipLandsOnASpeedUpAndAdvancesToAPositionHandingSpeedCard
 				          SpeedUpEffect new.
 				          (CardDealerEffect handing: speedCard) }
 		          at: { 2. 6 }
-		          Of: 10
-		          with: 100.
+		          Of: 10.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
@@ -331,8 +326,7 @@ CardTests >> testASpaceShipPlaysACardThatDoesntOwnAndAnErrorExceptionIsRaised [
 				          SpeedUpEffect new.
 				          (CardDealerEffect handing: speedCard) }
 		          at: { 2. 6 }
-		          Of: 10
-		          with: 100.
+		          Of: 10.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
@@ -479,8 +473,7 @@ CardTests >> testASpaceShipPlaysARedoCardAfterACancellationWasUsedOnASpeedAndThe
 				          (CardDealerEffect handing: redoCard).
 				          (CardDealerEffect handing: cancellationCard) }
 		          at: { 2. 3 }
-		          Of: 5
-		          with: 100.
+		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
@@ -541,8 +534,7 @@ CardTests >> testASpaceShipPlaysARedoCardAfterARedoCardAndStillAppliesTheSpeedCa
 	aBoard := RoundBoard
 		          boardWithOnly: { (CardDealerEffect handing: redoCard) }
 		          at: { 2 }
-		          Of: 5
-		          with: 100.
+		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
@@ -663,8 +655,7 @@ CardTests >> testASpaceShipPlaysARedoCardThreeTimesAfterAnOverloadCardWasPlayedA
 				          (CardDealerEffect handing: redoCard).
 				          (CardDealerEffect handing: redoCard) }
 		          at: { 2. 3 }
-		          Of: 5
-		          with: 100.
+		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
@@ -712,8 +703,7 @@ CardTests >> testASpaceShipPlaysARepeatCardAndAdvancesFourTilesBecauseASpeedUpWa
 	aBoard := RoundBoard
 		          boardWithOnly: { SpeedUpEffect new }
 		          at: { 2 }
-		          Of: 5
-		          with: 100.
+		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
@@ -932,8 +922,7 @@ CardTests >> testASpaceShipPlaysTwoSpeedCardsOnItSelfPlaysTheTurnReceivesASpeedC
 	aBoard := RoundBoard
 		          boardWithOnly: { (CardDealerEffect handing: speedCard) }
 		          at: { 4 }
-		          Of: 7
-		          with: 100.
+		          Of: 7.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
@@ -971,8 +960,7 @@ CardTests >> testASpaceShipUsesARepeatCardAfterAnotherSpaceShipLandedOnASpeedEff
 	aBoard := RoundBoard
 		          boardWithOnly: { SpeedUpEffect new }
 		          at: { 2 }
-		          Of: 5
-		          with: 100.
+		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi'. 'Paredes'. 'Armani' }
 		              on: aBoard

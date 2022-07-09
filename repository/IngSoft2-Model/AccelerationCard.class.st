@@ -16,17 +16,17 @@ AccelerationCard >> applyNegatedOn: anAccelerationCard on: anEnginePowerApplicat
 	anEnginePowerApplicator slowDownAllEngines
 ]
 
+{ #category : #private }
+AccelerationCard >> inventoriesAfterTargeting: target from: inventories on: cardApplicator [
+
+	^ cardApplicator inventoriesAfterNewGlobalCardOf: self
+]
+
 { #category : #asserting }
-AccelerationCard >> handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
+AccelerationCard >> playOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
 
 	aCardApplicator
 		handlePermanentPlayOf: self
 		from: cardPlayer
 		on: aGame
-]
-
-{ #category : #private }
-AccelerationCard >> inventoriesAfterTargeting: target from: inventories on: cardApplicator [
-
-	^ cardApplicator inventoriesAfterNewGlobalCardOf: self
 ]

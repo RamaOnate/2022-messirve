@@ -22,6 +22,11 @@ Sequence >> calculateNextInSequence [
 		                         ifFalse: [ currentSequenceNumber + 1 ]
 ]
 
+{ #category : #'as yet unclassified' }
+Sequence >> currentIndex [
+	^ currentSequenceNumber
+]
+
 { #category : #accessing }
 Sequence >> currentSequenceNumber [
 
@@ -39,5 +44,5 @@ Sequence >> initializeFormedBy: aSequence [
 Sequence >> next [
 
 	self calculateNextInSequence.
-	^ currentSequenceNumber
+	^ (objectSequence at: currentSequenceNumber)
 ]

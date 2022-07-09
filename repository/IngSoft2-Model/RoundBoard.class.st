@@ -26,25 +26,10 @@ RoundBoard class >> assertValidNumberOfPositions: numberOfPositions [
 		Error signal: 'A board cannot have less than two positions' ]
 ]
 
-{ #category : #'as yet unclassified' }
-RoundBoard class >> boardWithOnly: effectPositions at: effectTileNumbers Of: numberOfPositions with: aDistance [
-
-	| boardPositions |
-	self assertValidNumberOfPositions: numberOfPositions.
-	boardPositions := self noEffectPositionBoardWith: numberOfPositions.
-	1 to: effectTileNumbers size do: [ :i | 
-		boardPositions
-			at: (effectTileNumbers at: i)
-			put: (effectPositions at: i) ].
-	^ self createSome: boardPositions with: aDistance
-]
-
 { #category : #'instance creation' }
 RoundBoard class >> createSome: boardPositions with: aDistance [
 
-	^ self new
-		  initializeSome: boardPositions
-		  with: aDistance
+	^ self new initializeSome: boardPositions with: aDistance
 ]
 
 { #category : #verification }
@@ -56,25 +41,16 @@ RoundBoard class >> noEffectPositionBoardWith: numberOfTiles [
 	^ boardPositions
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 RoundBoard class >> with: numberOfPositions on: aDistance [
 
 	| defaultBoardPositions boardRandomizer |
 	self assertValidNumberOfPositions: numberOfPositions.
-	boardRandomizer := BoardRandomizer new.
-	defaultBoardPositions := boardRandomizer assignDistributedBoardOf:
+	boardRandomizer := BoardEffectSpecification new.
+	defaultBoardPositions := boardRandomizer distributedBoardOf:
 		                         numberOfPositions.
 	self assertValidBoardPositions: defaultBoardPositions.
 	^ self createSome: defaultBoardPositions with: aDistance
-]
-
-{ #category : #'as yet unclassified' }
-RoundBoard class >> withNoEffectsOf: numberOfPositions with: aDistance [
-
-	| boardPositions |
-	self assertValidNumberOfPositions: numberOfPositions.
-	boardPositions := self noEffectPositionBoardWith: numberOfPositions.
-	^ self createSome: boardPositions with: aDistance
 ]
 
 { #category : #private }

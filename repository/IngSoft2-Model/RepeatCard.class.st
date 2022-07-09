@@ -10,15 +10,15 @@ RepeatCard >> activatedTo: aTarget poweredBy: anEnginePowerApplicator on: aCardA
 	anEnginePowerApplicator applyRepeatTargetting: aTarget in: aCardApplicator from: aGame
 ]
 
-{ #category : #asserting }
-RepeatCard >> handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
-
-	aCardApplicator handleInstantaneousOf: self.
-
-]
-
 { #category : #private }
 RepeatCard >> inventoriesAfterTargeting: aTarget from: inventories on: aCardApplicator [
 
 	^ inventories
+]
+
+{ #category : #asserting }
+RepeatCard >> playOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
+
+	aCardApplicator handleInstantaneousOf: self.
+
 ]
