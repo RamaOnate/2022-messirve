@@ -83,7 +83,7 @@ ObjectCreationTests >> testASpaceShipBeginsInPositionOne [
 		              on: aBoard
 		              rolling: ''
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	self
 		assert: 'Messi'
@@ -102,7 +102,7 @@ ObjectCreationTests >> testSpaceShipsPlayingBeginAtLapOne [
 		              on: aBoard
 		              rolling: ''
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	self
 		assert: 'Messi'

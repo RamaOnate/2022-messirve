@@ -29,9 +29,9 @@ CardDealer >> handCardFromDeckTo: aSpaceShipInventory [
 ]
 
 { #category : #initialization }
-CardDealer >> initializeHanding: cards [
+CardDealer >> initializeHanding: aDeck [
 
-	deck := InfiniteDeck madeOf: cards.
+	deck := aDeck
 ]
 
 { #category : #'action handling' }

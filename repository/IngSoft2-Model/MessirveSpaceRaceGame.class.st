@@ -54,7 +54,7 @@ MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup
 		  on: aBoard
 		  rolling: aDiceCup
 		  withLapsToWin: anAmountOfLaps
-		  handing: self randomlyDistributedInfiniteDeck cards
+		  handing: self randomlyDistributedInfiniteDeck
 ]
 
 { #category : #initialization }

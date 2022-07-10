@@ -15,7 +15,7 @@ EffectPositionsTests >> testASpaceShipLandsOnAPositionWithoutEffectAndTheLapAndP
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -42,7 +42,7 @@ EffectPositionsTests >> testASpaceShipLandsOnASpeedUpAndThusFinishesLapOneAndIsN
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 3
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -71,7 +71,7 @@ EffectPositionsTests >> testASpaceShipLandsOnASpeedUpPositionAndAdvancesFourSpac
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 3
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -100,7 +100,7 @@ EffectPositionsTests >> testASpaceShipLandsOnAWormHolePositionAndCannotGoBackBeh
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 3
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -128,7 +128,7 @@ EffectPositionsTests >> testASpaceShipLandsOnAWormHolePositionAndGoesBackFourSpa
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 3
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -156,7 +156,7 @@ EffectPositionsTests >> testASpaceShipThatLandsOnAAtomicBombAfterFinishingTheFir
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.
@@ -213,7 +213,7 @@ EffectPositionsTests >> testASpaceShipThatLandsOnAAtomicBombTakesEverySpaceShipB
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.
@@ -277,7 +277,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAfterAnotherSpace
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -315,7 +315,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAfterAnotherSpace
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -353,7 +353,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAndAdvancesThirty
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -382,7 +382,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionButTheParsecsAwar
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -411,7 +411,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionThatMovesItForwar
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -440,7 +440,7 @@ EffectPositionsTests >> testASpaceshipThatMovesForwardFourAfterLandingOnASpeedUp
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -468,7 +468,7 @@ EffectPositionsTests >> testSpaceShipLandsOnAMoonWalkAndMovesBackThreePositionsE
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.
@@ -509,7 +509,7 @@ EffectPositionsTests >> testSpaceShipLandsOnAMoonWalkAndMovesEveryOtherSpaceShip
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.
@@ -569,7 +569,7 @@ EffectPositionsTests >> testSpaceShipsLandOnHyperJumpPositionFourTimesAndTheLast
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.

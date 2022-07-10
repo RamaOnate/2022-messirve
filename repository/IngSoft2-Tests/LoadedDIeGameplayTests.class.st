@@ -15,7 +15,7 @@ LoadedDieGameplayTests >> testAGameCannotBeAskedForAWinnerWhenItHasNotFinished [
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 	aSpaceGame playNextTurn.
 
 	self
@@ -36,7 +36,7 @@ LoadedDieGameplayTests >> testASpaceShipReachesTheLastPositionAndIsTheWinner [
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 	aSpaceGame playNextTurn.
 
 	self assert: aSpaceGame winner equals: 'Messi'
@@ -54,7 +54,7 @@ LoadedDieGameplayTests >> testASpaceShipRollsADieAndGoesThroughTheLastPositionAn
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 3
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 
 	aSpaceGame playNextTurn.
@@ -79,7 +79,7 @@ LoadedDieGameplayTests >> testASpaceShipRollsADieAndGoesThroughTheLastPositionTe
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 20
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -102,7 +102,7 @@ LoadedDieGameplayTests >> testASpaceShipRollsADieAndGoesThroughTheLastPositionTh
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 4
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playGame.
 
@@ -121,7 +121,7 @@ LoadedDieGameplayTests >> testASpaceShipRollsFourteenAndEndsUpOnPositionFiveOfLa
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 3
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 
 	aSpaceGame playNextTurn.
@@ -145,7 +145,7 @@ LoadedDieGameplayTests >> testASpaceShipRollsOneHundredButCannotGetFurtherOnTheB
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 	aSpaceGame playNextTurn.
 
 	self
@@ -167,7 +167,7 @@ LoadedDieGameplayTests >> testASpaceShipWinsTheGameAndFinishesInTheRankingFirstP
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playGame.
 	aSpaceGame calculateNewRanking.
@@ -185,7 +185,7 @@ LoadedDieGameplayTests >> testIsPossibleToKnowPositionsOfSpaceshipsAfterGameEnde
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 	aSpaceGame playGame.
 
 	self
@@ -211,7 +211,7 @@ LoadedDieGameplayTests >> testTheGameFinishesWhenASpaceShipGoesThroughTheFinishL
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 	aSpaceGame playNextTurn.
 
 	self assert: aSpaceGame isFinished
@@ -229,7 +229,7 @@ LoadedDieGameplayTests >> testTheRankingCanBeCheckedWhileTheGameIsStillInProgres
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -248,7 +248,7 @@ LoadedDieGameplayTests >> testThreeSpaceShipPlayTheGameAndMessiComesFirstDePaulS
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playGame.
 
@@ -268,7 +268,7 @@ LoadedDieGameplayTests >> testTwoSpaceShipsPlayTheGameAndMessiComesFirst [
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 	aSpaceGame playGame.
 
 	self assert: aSpaceGame isFinished.
@@ -290,7 +290,7 @@ LoadedDieGameplayTests >> testTwoSpaceShipsPlayTheGameWithTwoDiceAndTheGameFinis
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 	aSpaceGame playGame.
 
 	self assert: aSpaceGame isFinished
