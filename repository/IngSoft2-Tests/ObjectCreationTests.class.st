@@ -51,6 +51,18 @@ ObjectCreationTests >> testAMoonWalkBoardPositionCannotHaveAnNLowerThanOne [
 ]
 
 { #category : #tests }
+ObjectCreationTests >> testARoundBoardCanAddOneEffectToDifferentPositions [
+
+	| aBoard speedUpEffect |
+	speedUpEffect := SpeedUpEffect new.
+	aBoard := RoundBoard withOnly: { speedUpEffect } at: { 2 . 4 . 5 } Of: 5.
+	self assert: (aBoard boardEffects at: 2) equals: speedUpEffect.
+	self assert: (aBoard boardEffects at: 4) equals: speedUpEffect.
+	self assert: (aBoard boardEffects at: 5) equals: speedUpEffect.
+	
+]
+
+{ #category : #tests }
 ObjectCreationTests >> testARoundBoardCannotBeCreatedWithLessThanTwoPositions [
 
 	self

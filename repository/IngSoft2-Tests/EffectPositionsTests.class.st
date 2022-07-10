@@ -31,7 +31,7 @@ EffectPositionsTests >> testASpaceShipLandsOnASpeedUpAndThusFinishesLapOneAndIsN
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { SpeedUpEffect new }
+		          withOnly: { SpeedUpEffect new }
 		          at: { 2 }
 		          Of: 5
 		          with: 100.
@@ -60,7 +60,7 @@ EffectPositionsTests >> testASpaceShipLandsOnASpeedUpPositionAndAdvancesFourSpac
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { SpeedUpEffect new }
+		          withOnly: { SpeedUpEffect new }
 		          at: { 2 }
 		          Of: 10
 		          with: 100.
@@ -89,7 +89,7 @@ EffectPositionsTests >> testASpaceShipLandsOnAWormHolePositionAndCannotGoBackBeh
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { WormHoleEffect new }
+		          withOnly: { WormHoleEffect new }
 		          at: { 2 }
 		          Of: 5
 		          with: 100.
@@ -117,7 +117,7 @@ EffectPositionsTests >> testASpaceShipLandsOnAWormHolePositionAndGoesBackFourSpa
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { WormHoleEffect new }
+		          withOnly: { WormHoleEffect new }
 		          at: { 2 }
 		          Of: 5
 		          with: 100.
@@ -145,7 +145,7 @@ EffectPositionsTests >> testASpaceShipThatLandsOnAAtomicBombAfterFinishingTheFir
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { AtomicBombEffect new }
+		          withOnly: { AtomicBombEffect new }
 		          at: { 1 }
 		          Of: 3
 		          with: 100.
@@ -202,7 +202,7 @@ EffectPositionsTests >> testASpaceShipThatLandsOnAAtomicBombTakesEverySpaceShipB
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { AtomicBombEffect new }
+		          withOnly: { AtomicBombEffect new }
 		          at: { 3 }
 		          Of: 4
 		          with: 100.
@@ -263,7 +263,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAfterAnotherSpace
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly: { (HyperJumpEffect withAll: { 
+		          withOnly: { (HyperJumpEffect withAll: { 
 					           (ParsecMeasure of: 30).
 					           (LightYearMeasure of: 60).
 					           (ParsecMeasure of: 10) }) }
@@ -301,7 +301,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAfterAnotherSpace
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly: { (HyperJumpEffect withAll: { 
+		          withOnly: { (HyperJumpEffect withAll: { 
 					           (ParsecMeasure of: 30).
 					           (LightYearMeasure of: 60).
 					           (LightYearMeasure of: 30) }) }
@@ -339,7 +339,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAndAdvancesThirty
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly: { (HyperJumpEffect withAll: { 
+		          withOnly: { (HyperJumpEffect withAll: { 
 					           (ParsecMeasure of: 30).
 					           (LightYearMeasure of: 40).
 					           (LightYearMeasure of: 30) }) }
@@ -370,7 +370,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionButTheParsecsAwar
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
+		          withOnly:
 		          { (HyperJumpEffect withAll: { (LightYearMeasure of: 15) }) }
 		          at: { 2 }
 		          Of: 10
@@ -399,7 +399,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionThatMovesItForwar
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
+		          withOnly:
 		          { (HyperJumpEffect withAll: { (ParsecMeasure of: 10) }) }
 		          at: { 10 }
 		          Of: 10
@@ -427,7 +427,7 @@ EffectPositionsTests >> testASpaceshipThatMovesForwardFourAfterLandingOnASpeedUp
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly: { 
+		          withOnly: { 
 				          SpeedUpEffect new.
 				          WormHoleEffect new }
 		          at: { 2. 6 }
@@ -457,7 +457,7 @@ EffectPositionsTests >> testSpaceShipLandsOnAMoonWalkAndMovesBackThreePositionsE
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { (MoonWalkEffect takingBack: 1) }
+		          withOnly: { (MoonWalkEffect takingBack: 1) }
 		          at: { 3 }
 		          Of: 5
 		          with: 100.
@@ -498,7 +498,7 @@ EffectPositionsTests >> testSpaceShipLandsOnAMoonWalkAndMovesEveryOtherSpaceShip
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { (MoonWalkEffect takingBack: 3) }
+		          withOnly: { (MoonWalkEffect takingBack: 3) }
 		          at: { 2 }
 		          Of: 10
 		          with: 100.
@@ -555,7 +555,7 @@ EffectPositionsTests >> testSpaceShipsLandOnHyperJumpPositionFourTimesAndTheLast
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly: { (HyperJumpEffect withAll: { 
+		          withOnly: { (HyperJumpEffect withAll: { 
 					           (ParsecMeasure of: 30).
 					           (LightYearMeasure of: 60).
 					           (LightYearMeasure of: 30) }) }

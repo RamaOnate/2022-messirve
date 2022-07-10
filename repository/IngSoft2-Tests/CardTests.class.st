@@ -31,7 +31,7 @@ CardTests >> testASpaceShipCannotPlayACancellationCardOnAnotherCancellationCard 
 	cancellationCardTwo := CancellationCard new.
 	speedCard := SpeedCard new.
 	aBoard := RoundBoard
-		          boardWithOnly:
+		          withOnly:
 		          { (CardDealerEffect handing: cancellationCardTwo) }
 		          at: { 3 }
 		          Of: 5.
@@ -91,7 +91,7 @@ CardTests >> testASpaceShipCannotPlayARedoCardOnASpeedCardDuringATurnThatIsNotTh
 	redoCard := RedoCard new.
 	speedCard := SpeedCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { SpeedUpEffect new }
+		          withOnly: { SpeedUpEffect new }
 		          at: { 2 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -125,7 +125,7 @@ CardTests >> testASpaceShipLandsOnAPositionHandingASpeedCardAndNowHasThreeCards 
 	overloadCard := OverloadCard new.
 	speedCard := SpeedCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { (CardDealerEffect handing: speedCard) }
+		          withOnly: { (CardDealerEffect handing: speedCard) }
 		          at: { 2 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -150,7 +150,7 @@ CardTests >> testASpaceShipLandsOnAPositionHandingASpeedCardTwiceAndNowHasFourCa
 	overloadCard := OverloadCard new.
 	speedCard := SpeedCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { 
+		          withOnly: { 
 				          (CardDealerEffect handing: speedCard).
 				          (CardDealerEffect handing: speedCard) }
 		          at: { 2. 3 }
@@ -179,7 +179,7 @@ CardTests >> testASpaceShipLandsOnASpeedUpAndAdvancesToAPositionHandingSpeedCard
 	overloadCard := OverloadCard new.
 	speedCard := SpeedCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { 
+		          withOnly: { 
 				          SpeedUpEffect new.
 				          (CardDealerEffect handing: speedCard) }
 		          at: { 2. 6 }
@@ -322,7 +322,7 @@ CardTests >> testASpaceShipPlaysACardThatDoesntOwnAndAnErrorExceptionIsRaised [
 	overloadCard := OverloadCard new.
 	speedCard := SpeedCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { 
+		          withOnly: { 
 				          SpeedUpEffect new.
 				          (CardDealerEffect handing: speedCard) }
 		          at: { 2. 6 }
@@ -469,7 +469,7 @@ CardTests >> testASpaceShipPlaysARedoCardAfterACancellationWasUsedOnASpeedAndThe
 	redoCard := RedoCard new.
 	cancellationCard := CancellationCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { 
+		          withOnly: { 
 				          (CardDealerEffect handing: redoCard).
 				          (CardDealerEffect handing: cancellationCard) }
 		          at: { 2. 3 }
@@ -532,7 +532,7 @@ CardTests >> testASpaceShipPlaysARedoCardAfterARedoCardAndStillAppliesTheSpeedCa
 	speedCard := SpeedCard new.
 	redoCard := RedoCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { (CardDealerEffect handing: redoCard) }
+		          withOnly: { (CardDealerEffect handing: redoCard) }
 		          at: { 2 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -651,7 +651,7 @@ CardTests >> testASpaceShipPlaysARedoCardThreeTimesAfterAnOverloadCardWasPlayedA
 	overloadCard := OverloadCard new.
 	redoCard := RedoCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { 
+		          withOnly: { 
 				          (CardDealerEffect handing: redoCard).
 				          (CardDealerEffect handing: redoCard) }
 		          at: { 2. 3 }
@@ -701,7 +701,7 @@ CardTests >> testASpaceShipPlaysARepeatCardAndAdvancesFourTilesBecauseASpeedUpWa
 	aLoadedDie := LoadedDie rolling: { 1 }.
 	repeatCard := RepeatCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { SpeedUpEffect new }
+		          withOnly: { SpeedUpEffect new }
 		          at: { 2 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -920,7 +920,7 @@ CardTests >> testASpaceShipPlaysTwoSpeedCardsOnItSelfPlaysTheTurnReceivesASpeedC
 	aLoadedDie := LoadedDie rolling: { 1 }.
 	speedCard := SpeedCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { (CardDealerEffect handing: speedCard) }
+		          withOnly: { (CardDealerEffect handing: speedCard) }
 		          at: { 4 }
 		          Of: 7.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -958,7 +958,7 @@ CardTests >> testASpaceShipUsesARepeatCardAfterAnotherSpaceShipLandedOnASpeedEff
 	aLoadedDie := LoadedDie rolling: { 6 }.
 	repeatCard := RepeatCard new.
 	aBoard := RoundBoard
-		          boardWithOnly: { SpeedUpEffect new }
+		          withOnly: { SpeedUpEffect new }
 		          at: { 2 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame

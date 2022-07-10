@@ -1,26 +1,17 @@
 Extension { #name : #RoundBoard }
 
 { #category : #'*IngSoft2-Tests' }
-RoundBoard class >> boardWithOnly: cards at: positions Of: boardPositions [
+RoundBoard class >> assignEffectsTo: effectTileNumbers with: boardPositions and: effectPositions [
 
-	^ self
-		  boardWithOnly: cards
-		  at: positions
-		  Of: boardPositions
-		  with: 100
-]
+	| effectTileSequence maxCycle effectPositionSequence |
+	effectTileSequence := Sequence formedBy: effectTileNumbers.
+	effectPositionSequence := Sequence formedBy: effectPositions.
+	maxCycle := effectTileNumbers size max: effectPositions size.
 
-{ #category : #'*IngSoft2-Tests' }
-RoundBoard class >> boardWithOnly: effectPositions at: effectTileNumbers Of: numberOfPositions with: aDistance [
-
-	| boardPositions |
-	self assertValidNumberOfPositions: numberOfPositions.
-	boardPositions := self noEffectPositionBoardWith: numberOfPositions.
-	1 to: effectTileNumbers size do: [ :i | 
+	1 to: maxCycle do: [ :i | 
 		boardPositions
-			at: (effectTileNumbers at: i)
-			put: (effectPositions at: i) ].
-	^ self createSome: boardPositions with: aDistance
+			at: effectTileSequence next
+			put: effectPositionSequence next ]
 ]
 
 { #category : #'*IngSoft2-Tests' }
@@ -35,5 +26,28 @@ RoundBoard class >> withNoEffectsOf: numberOfPositions with: aDistance [
 	| boardPositions |
 	self assertValidNumberOfPositions: numberOfPositions.
 	boardPositions := self noEffectPositionBoardWith: numberOfPositions.
+	^ self createSome: boardPositions with: aDistance
+]
+
+{ #category : #'*IngSoft2-Tests' }
+RoundBoard class >> withOnly: cards at: positions Of: boardPositions [
+
+	^ self
+		  withOnly: cards
+		  at: positions
+		  Of: boardPositions
+		  with: 100
+]
+
+{ #category : #'*IngSoft2-Tests' }
+RoundBoard class >> withOnly: effectPositions at: effectTileNumbers Of: numberOfPositions with: aDistance [
+
+	| boardPositions |
+	self assertValidNumberOfPositions: numberOfPositions.
+	boardPositions := self noEffectPositionBoardWith: numberOfPositions.
+	self
+		assignEffectsTo: effectTileNumbers
+		with: boardPositions
+		and: effectPositions.
 	^ self createSome: boardPositions with: aDistance
 ]

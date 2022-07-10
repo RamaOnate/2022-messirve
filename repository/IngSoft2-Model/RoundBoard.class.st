@@ -79,6 +79,11 @@ RoundBoard >> applyLastEffectTo: aSpaceShipStatus from: statuses on: aGame [
 ]
 
 { #category : #accessing }
+RoundBoard >> boardEffects [
+	^ boardEffects
+]
+
+{ #category : #accessing }
 RoundBoard >> effectAppliedOnPosition: aPosition [
 
 	^ boardEffects at: aPosition
