@@ -24,16 +24,14 @@ CardDealer >> hand: aCard to: aSpaceShipInventory [
 CardDealer >> handCardFromDeckTo: aSpaceShipInventory [
 
 	| cardToHand |
-	cardToHand := deck at: cardHandingSequence currentSequenceNumber.
-	cardHandingSequence next.
+	cardToHand := deck pickOne.
 	^ aSpaceShipInventory draw: cardToHand
 ]
 
 { #category : #initialization }
 CardDealer >> initializeHanding: cards [
 
-	deck := cards.
-	cardHandingSequence := Sequence formedBy: cards
+	deck := InfiniteDeck madeOf: cards.
 ]
 
 { #category : #'action handling' }

@@ -54,7 +54,7 @@ MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup
 		  on: aBoard
 		  rolling: aDiceCup
 		  withLapsToWin: anAmountOfLaps
-		  handing: self randomlyDistributedDeck
+		  handing: self randomlyDistributedInfiniteDeck cards
 ]
 
 { #category : #initialization }
@@ -71,12 +71,12 @@ MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup
 ]
 
 { #category : #initialization }
-MessirveSpaceRaceGame class >> randomlyDistributedDeck [
+MessirveSpaceRaceGame class >> randomlyDistributedInfiniteDeck [
 
 	| randomDeck |
-	randomDeck := Deck new.
+	randomDeck := InfiniteDeck withRandom: 100.
 
-	^ randomDeck ofOneHundredRandomCards
+	^ randomDeck
 ]
 
 { #category : #accessing }
@@ -236,7 +236,7 @@ MessirveSpaceRaceGame >> nameOfSpaceShipPlaying [
 MessirveSpaceRaceGame >> nextTurn [
 
 	spaceShipSequence next.
-	currentTurn := spaceShipSequence currentIndex.
+	currentTurn := spaceShipSequence currentSequenceNumber.
 	self isFinished ifFalse: [ 
 		gameStatus := MessirveSpaceGameStartOfTurnStatus new ]
 ]

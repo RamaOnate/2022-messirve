@@ -22,11 +22,6 @@ Sequence >> calculateNextInSequence [
 		                         ifFalse: [ currentSequenceNumber + 1 ]
 ]
 
-{ #category : #'as yet unclassified' }
-Sequence >> currentIndex [
-	^ currentSequenceNumber
-]
-
 { #category : #accessing }
 Sequence >> currentSequenceNumber [
 

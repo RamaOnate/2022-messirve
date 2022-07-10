@@ -90,7 +90,7 @@ CardApplicator >> assertThereAreActiveCardsInPlay [
 CardApplicator >> cardsInInventoryOf: aSpaceShip [
 
 	^ (inventories detect: [ :inventory | 
-		   inventory spaceShip = aSpaceShip ]) deck
+		   inventory spaceShip = aSpaceShip ]) cards
 ]
 
 { #category : #private }

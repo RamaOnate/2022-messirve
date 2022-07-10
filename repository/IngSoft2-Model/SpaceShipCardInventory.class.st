@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'spaceShip',
 		'activeCards',
-		'deck'
+		'cards'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -28,35 +28,35 @@ SpaceShipCardInventory >> addCardToActiveCards: aCard [
 ]
 
 { #category : #accessing }
-SpaceShipCardInventory >> deck [
+SpaceShipCardInventory >> cards [
 
-	^ deck
+	^ cards
 ]
 
 { #category : #drawing }
 SpaceShipCardInventory >> draw: aCard [ 
 
-	deck add: aCard
+	cards add: aCard
 ]
 
 { #category : #testing }
 SpaceShipCardInventory >> includes: aCard [
 
-	^ deck anySatisfy: [ :card | card == aCard ]
+	^ cards anySatisfy: [ :card | card == aCard ]
 ]
 
 { #category : #initialization }
 SpaceShipCardInventory >> initializeCarriedBy: aSpaceShip [
 
 	spaceShip := aSpaceShip.
-	deck := OrderedCollection new.
+	cards := OrderedCollection new.
 	activeCards := OrderedCollection new
 ]
 
 { #category : #removing }
 SpaceShipCardInventory >> remove: aCard [
 
-	deck remove: aCard
+	cards remove: aCard
 ]
 
 { #category : #accessing }
