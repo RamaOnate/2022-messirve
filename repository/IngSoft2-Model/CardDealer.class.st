@@ -24,16 +24,14 @@ CardDealer >> hand: aCard to: aSpaceShipInventory [
 CardDealer >> handCardFromDeckTo: aSpaceShipInventory [
 
 	| cardToHand |
-	cardToHand := deck at: cardHandingSequence currentSequenceNumber.
-	cardHandingSequence next.
+	cardToHand := deck pickOne.
 	^ aSpaceShipInventory draw: cardToHand
 ]
 
 { #category : #initialization }
-CardDealer >> initializeHanding: cards [
+CardDealer >> initializeHanding: aDeck [
 
-	deck := cards.
-	cardHandingSequence := Sequence formedBy: cards
+	deck := aDeck
 ]
 
 { #category : #'action handling' }
@@ -44,4 +42,10 @@ CardDealer >> inventoriesAfterDrawingTwoFrom: inventories [
 		                              self handCardFromDeckTo: inventory ].
 	^ inventoriesAfterDrawingOne collect: [ :inventory | 
 		  self handCardFromDeckTo: inventory ]
+]
+
+{ #category : #private }
+CardDealer >> putAway: aCard [
+
+	deck putAway: aCard
 ]

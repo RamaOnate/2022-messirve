@@ -35,6 +35,21 @@ CardApplicator >> applyAllNegatedCardsOf: aCard [
 ]
 
 { #category : #private }
+CardApplicator >> applyDoubledCardsOf: aCard from: aGame [
+
+	inventories do: [ :inventory | 
+		self doubleEffectOf: aCard from: inventory in: aGame ].
+
+	globalInventory do: [ :card | 
+		card = aCard ifTrue: [ 
+			aCard
+				activatedTo: self
+				poweredBy: engineApplicator
+				on: self
+				from: aGame ] ]
+]
+
+{ #category : #private }
 CardApplicator >> applyNegatedAndRemove: aCard from: inventory [
 
 	^ inventory activeCards do: [ :card | 
@@ -66,12 +81,12 @@ CardApplicator >> assertCardIsActive: aCard [
 { #category : #asserting }
 CardApplicator >> assertSpaceShip: aSpaceShip owns: aCard [
 
-	| spaceShipInventory cardExists |
+	| spaceShipInventory |
 	spaceShipInventory := inventories detect: [ :inventory | 
 		                      inventory spaceShip = aSpaceShip ].
-	cardExists := spaceShipInventory inventory anySatisfy: [ :card | 
-		              card == aCard ].
-	cardExists ifFalse: [ Error signal: 'SpaceShip doesnt own that card' ]
+
+	(spaceShipInventory includes: aCard) ifFalse: [ 
+		Error signal: 'SpaceShip doesnt own that card' ]
 ]
 
 { #category : #asserting }
@@ -90,7 +105,7 @@ CardApplicator >> assertThereAreActiveCardsInPlay [
 CardApplicator >> cardsInInventoryOf: aSpaceShip [
 
 	^ (inventories detect: [ :inventory | 
-		   inventory spaceShip = aSpaceShip ]) inventory
+		   inventory spaceShip = aSpaceShip ]) cards
 ]
 
 { #category : #private }
@@ -107,15 +122,57 @@ CardApplicator >> distribute: aCard toTheInventoryOf: aSpaceShip [
 CardApplicator >> distributeInitialCardsTo: spaceShipNames [
 
 	inventories := spaceShipNames collect: [ :spaceShip | 
-		               SpaceShipInventory carriedBy: spaceShip ].
+		               SpaceShipCardInventory carriedBy: spaceShip ].
 
 	inventories := cardDealer inventoriesAfterDrawingTwoFrom: inventories
+]
+
+{ #category : #private }
+CardApplicator >> doubleEffectOf: aCard from: inventory in: aGame [
+
+	inventory activeCards do: [ :card | 
+		card = aCard ifTrue: [ 
+			aCard
+				activatedTo: inventory spaceShip
+				poweredBy: engineApplicator
+				on: self
+				from: aGame ] ]
 ]
 
 { #category : #accessing }
 CardApplicator >> enginePowerOf: aSpaceShip [ 
 
 	^engineApplicator powerOf: aSpaceShip 
+]
+
+{ #category : #private }
+CardApplicator >> handleCancellationOf: aCancellation to: cardTarget [
+
+	self assertThereAreActiveCardsInPlay.
+	self assertCardIsActive: cardTarget.
+	self handleInstantaneousOf: aCancellation.
+	cardDealer putAway: cardTarget.
+	cardDealer putAway: aCancellation
+]
+
+{ #category : #private }
+CardApplicator >> handleInstantaneousOf: aCard [
+
+	self makeLastPlayed: aCard
+]
+
+{ #category : #private }
+CardApplicator >> handlePermanentPlayOf: aCard from: cardPlayer on: aGame [
+
+	aGame assertPermanentPlayedOnCorrectlyBy: cardPlayer.
+	self makeLastPlayed: aCard
+]
+
+{ #category : #private }
+CardApplicator >> handleRedoFrom: cardPlayer of: aCard in: aGame [
+
+	aGame assertPermanentPlayedOnCorrectlyBy: cardPlayer.
+	cardDealer putAway: aCard
 ]
 
 { #category : #initialization }
@@ -137,6 +194,17 @@ CardApplicator >> inventoriesAfter: cardTarget wasApplied: aCard [
 		                         inventory spaceShip == cardTarget ].
 	inventoryOfCardTarget addCardToActiveCards: aCard.
 	^ inventories
+]
+
+{ #category : #private }
+CardApplicator >> inventoriesAfterAdding: aCard from: someInventories [
+
+	| newInventories |
+	newInventories := someInventories do: [ :inventory | 
+		                  inventory activeCards do: [ :card | 
+			                  card == aCard ifTrue: [ 
+				                  inventory addCardToActiveCards: aCard ] ] ].
+	^ newInventories
 ]
 
 { #category : #accessing }
@@ -174,13 +242,14 @@ CardApplicator >> remove: aCard from: cardPlayer [
 	| inventoryOfCardPlayer |
 	inventoryOfCardPlayer := inventories detect: [ :inventory | 
 		                         inventory spaceShip == cardPlayer ].
-	inventoryOfCardPlayer removeFromInventory: aCard
+	inventoryOfCardPlayer remove: aCard
 ]
 
 { #category : #private }
 CardApplicator >> spaceShip: cardPlayer plays: aCard on: cardTarget from: aGame [
 
-	aCard handleLastPlayedWithPlayOf: cardPlayer at: cardTarget on: self from: aGame.
+	self assertSpaceShip: cardPlayer owns: aCard.
+	aCard playOf: cardPlayer at: cardTarget on: self from: aGame.
 
 	self remove: aCard from: cardPlayer.
 

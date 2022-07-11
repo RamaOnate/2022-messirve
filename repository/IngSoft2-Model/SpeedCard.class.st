@@ -1,6 +1,6 @@
 Class {
 	#name : #SpeedCard,
-	#superclass : #PermanentCard,
+	#superclass : #Object,
 	#category : #'IngSoft2-Model'
 }
 
@@ -20,4 +20,13 @@ SpeedCard >> applyNegatedOn: aSpaceShip on: anEnginePowerApplicator from: aRound
 SpeedCard >> inventoriesAfterTargeting: cardTarget from: inventories on: aCardApplicator [
 
 	^ aCardApplicator inventoriesAfter: cardTarget wasApplied: self
+]
+
+{ #category : #asserting }
+SpeedCard >> playOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
+
+	aCardApplicator
+		handlePermanentPlayOf: self
+		from: cardPlayer
+		on: aGame
 ]

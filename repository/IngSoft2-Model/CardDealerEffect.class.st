@@ -1,6 +1,6 @@
 Class {
 	#name : #CardDealerEffect,
-	#superclass : #Object,
+	#superclass : #BoardEffect,
 	#instVars : [
 		'card'
 	],
@@ -8,12 +8,24 @@ Class {
 }
 
 { #category : #initialization }
-CardDealerEffect class >> handing: aCard [
+CardDealerEffect class >> createHanding: aCard [
 
 	^ self new initializeHanding: { aCard }
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
+CardDealerEffect class >> handing: aCard [
+
+	^ self createHanding: aCard
+]
+
+{ #category : #initialization }
+CardDealerEffect class >> handingFrom: aDeck [ 
+	
+	^ self createHanding: aDeck
+]
+
+{ #category : #initialization }
 CardDealerEffect class >> handingRandomCards [
 
 	^ self new initializeHanding: { CancellationCard new . AccelerationCard new . OverloadCard new . SpeedCard new . RedoCard new . RepeatCard new }
@@ -22,7 +34,11 @@ CardDealerEffect class >> handingRandomCards [
 { #category : #private }
 CardDealerEffect >> applyOn: statuses activatedBy: aStatus playedOn: aBoard and: aGame appliedBy: effectApplicator [
 
-	^ effectApplicator applyCardDealerEffectTo: aStatus with: (card atRandom) from: statuses playedOn: aGame
+	^ effectApplicator
+		  applyCardDealerEffectTo: aStatus
+		  with: (card at: 1) pickOne
+		  from: statuses
+		  playedOn: aGame
 ]
 
 { #category : #initialization }

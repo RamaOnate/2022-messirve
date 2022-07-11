@@ -1,6 +1,6 @@
 Class {
 	#name : #AccelerationCard,
-	#superclass : #PermanentCard,
+	#superclass : #Object,
 	#category : #'IngSoft2-Model'
 }
 
@@ -20,4 +20,13 @@ AccelerationCard >> applyNegatedOn: anAccelerationCard on: anEnginePowerApplicat
 AccelerationCard >> inventoriesAfterTargeting: target from: inventories on: cardApplicator [
 
 	^ cardApplicator inventoriesAfterNewGlobalCardOf: self
+]
+
+{ #category : #asserting }
+AccelerationCard >> playOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
+
+	aCardApplicator
+		handlePermanentPlayOf: self
+		from: cardPlayer
+		on: aGame
 ]

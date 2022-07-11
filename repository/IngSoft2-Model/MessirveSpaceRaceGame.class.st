@@ -33,25 +33,9 @@ MessirveSpaceRaceGame class >> assertValidLapsOf: anInteger [
 		Error signal: 'Laps must be greater than one' ]
 ]
 
-{ #category : #'as yet unclassified' }
-MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup withLapsToWin: anAmountOfLaps [
+{ #category : #'instance creation' }
+MessirveSpaceRaceGame class >> createPlayedBy: spaceShips on: aBoard rolling: aDiceCup withLapsToWin: anAmountOfLaps handing: cards [
 
-	self assertPlayerNameNotDuplicated: spaceShips.
-	self assertValidLapsOf: anAmountOfLaps.
-
-	^ self new
-		  initiallizePlayedBy: spaceShips
-		  on: aBoard
-		  rolling: aDiceCup
-		  withLapsToWin: anAmountOfLaps
-		  handing: self randomlyDistributedDeck
-]
-
-{ #category : #initialization }
-MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup withLapsToWin: anAmountOfLaps handing: cards [
-
-	self assertPlayerNameNotDuplicated: spaceShips.
-	self assertValidLapsOf: anAmountOfLaps. 
 	^ self new
 		  initiallizePlayedBy: spaceShips
 		  on: aBoard
@@ -60,36 +44,39 @@ MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup
 		  handing: cards
 ]
 
-{ #category : #'as yet unclassified' }
-MessirveSpaceRaceGame class >> randomlyDistributedDeck [
+{ #category : #initialization }
+MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup withLapsToWin: anAmountOfLaps [
 
-    | source cancellationCard accelerationCard overloadCard speedCard redoCard repeatCard probabilityEvents discreteProbabilityDistribution |
-    cancellationCard := CancellationCard new.
-    accelerationCard := AccelerationCard new.
-    overloadCard := OverloadCard new.
-    speedCard := SpeedCard new.
-    redoCard := RedoCard new.
-    repeatCard := RepeatCard new.
+	self assertPlayerNameNotDuplicated: spaceShips.
+	self assertValidLapsOf: anAmountOfLaps.
+	^ self
+		  createPlayedBy: spaceShips
+		  on: aBoard
+		  rolling: aDiceCup
+		  withLapsToWin: anAmountOfLaps
+		  handing: self randomlyDistributedInfiniteDeck
+]
 
+{ #category : #initialization }
+MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup withLapsToWin: anAmountOfLaps handing: cards [
 
-    probabilityEvents := { 
-                             (ProbabilityEvent
-                                  of: cancellationCard
-                                  with: 1 / 6).
-                             (ProbabilityEvent
-                                  of: accelerationCard
-                                  with: 1 / 6).
-                             (ProbabilityEvent of: overloadCard with: 1 / 6).
-                             (ProbabilityEvent of: speedCard with: 1 / 6).
-                             (ProbabilityEvent of: redoCard with: 1 / 6).
-                             (ProbabilityEvent of: repeatCard with: 1 / 6) }.
+	self assertPlayerNameNotDuplicated: spaceShips.
+	self assertValidLapsOf: anAmountOfLaps.
+	^ self
+		  createPlayedBy: spaceShips
+		  on: aBoard
+		  rolling: aDiceCup
+		  withLapsToWin: anAmountOfLaps
+		  handing: cards
+]
 
-    discreteProbabilityDistribution := DiscreteProbabilityDistribution 
-                                           withAll: probabilityEvents.
-    source := DiscreteProbabilityEventSource with:
-                  discreteProbabilityDistribution.
+{ #category : #initialization }
+MessirveSpaceRaceGame class >> randomlyDistributedInfiniteDeck [
 
-    ^ source next: 100
+	| randomDeck |
+	randomDeck := InfiniteDeck with: 100.
+
+	^ randomDeck
 ]
 
 { #category : #accessing }
@@ -248,7 +235,8 @@ MessirveSpaceRaceGame >> nameOfSpaceShipPlaying [
 { #category : #private }
 MessirveSpaceRaceGame >> nextTurn [
 
-	currentTurn := spaceShipSequence next.
+	spaceShipSequence next.
+	currentTurn := spaceShipSequence currentSequenceNumber.
 	self isFinished ifFalse: [ 
 		gameStatus := MessirveSpaceGameStartOfTurnStatus new ]
 ]

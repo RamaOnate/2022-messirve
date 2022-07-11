@@ -1,6 +1,6 @@
 Class {
 	#name : #OverloadCard,
-	#superclass : #PermanentCard,
+	#superclass : #Object,
 	#category : #'IngSoft2-Model'
 }
 
@@ -20,4 +20,13 @@ OverloadCard >> applyNegatedOn: aSpaceShip on: anEnginePowerApplicator from: aRo
 OverloadCard >> inventoriesAfterTargeting: cardTarget from: inventories on: aCardApplicator [
 
 	^ aCardApplicator inventoriesAfter: cardTarget wasApplied: self
+]
+
+{ #category : #asserting }
+OverloadCard >> playOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
+
+	aCardApplicator
+		handlePermanentPlayOf: self
+		from: cardPlayer
+		on: aGame
 ]

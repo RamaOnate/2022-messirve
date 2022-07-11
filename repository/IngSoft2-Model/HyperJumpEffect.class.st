@@ -1,39 +1,24 @@
 Class {
 	#name : #HyperJumpEffect,
-	#superclass : #Object,
+	#superclass : #BoardEffect,
 	#instVars : [
 		'sequence',
-		'distanceUnits'
+		'distances'
 	],
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #asserting }
-HyperJumpEffect class >> assertValid: someParsecs and: someLightyears [
+{ #category : #'instance creation' }
+HyperJumpEffect class >> withAll: someDistances [ 
 
-	someParsecs size = someLightyears size ifFalse: [ 
-		Error signal:
-			'Parsec and lightyear collection must have the same size' ]
-]
-
-{ #category : #initialization }
-HyperJumpEffect class >> with: someParsecs and: someLightyears [
-
-	| distanceUnits |
-	self assertValid: someParsecs and: someLightyears.
-	distanceUnits := OrderedCollection new.
-	1 to: someParsecs size do: [ :i | 
-		distanceUnits add: (SpaceGameDistanceUnit
-				 with: (someParsecs at: i)
-				 and: (someLightyears at: i)) ].
-	^ self new initializeWith: distanceUnits
+	^ self new initializeWith: someDistances
 ]
 
 { #category : #private }
 HyperJumpEffect >> applyOn: statuses activatedBy: aStatus playedOn: aBoard and: aGame appliedBy: effectApplicator [
 
 	| aDistance |
-	aDistance := distanceUnits at: sequence currentSequenceNumber.
+	aDistance := distances at: sequence currentSequenceNumber.
 	sequence next.
 
 	^ effectApplicator
@@ -47,6 +32,6 @@ HyperJumpEffect >> applyOn: statuses activatedBy: aStatus playedOn: aBoard and: 
 { #category : #initialization }
 HyperJumpEffect >> initializeWith: someDistanceUnits [
 
-	distanceUnits := someDistanceUnits.
-	sequence := Sequence formedBy: distanceUnits.
+	distances := someDistanceUnits.
+	sequence := Sequence formedBy: distances.
 ]

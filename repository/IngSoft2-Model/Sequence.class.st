@@ -39,5 +39,5 @@ Sequence >> initializeFormedBy: aSequence [
 Sequence >> next [
 
 	self calculateNextInSequence.
-	^ currentSequenceNumber
+	^ (objectSequence at: currentSequenceNumber)
 ]

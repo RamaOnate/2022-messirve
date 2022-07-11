@@ -1,6 +1,6 @@
 Class {
 	#name : #ObjectCreationTests,
-	#superclass : #MessirveTests,
+	#superclass : #TestCase,
 	#category : #'IngSoft2-Tests'
 }
 
@@ -23,7 +23,7 @@ ObjectCreationTests >> testAGameCannotBePlayedWithLessThanTwoLaps [
 	aDiceCup := DiceCup withAll: { 
 			            aLoadedDie1.
 			            aLoadedDie2 }.
-	aBoard := RoundBoard withNoEffectsOf: 6 with: 100 and: 0.
+	aBoard := RoundBoard withNoEffectsOf: 6.
 
 	self
 		should: [ 
@@ -51,10 +51,22 @@ ObjectCreationTests >> testAMoonWalkBoardPositionCannotHaveAnNLowerThanOne [
 ]
 
 { #category : #tests }
+ObjectCreationTests >> testARoundBoardCanAddOneEffectToDifferentPositions [
+
+	| aBoard speedUpEffect |
+	speedUpEffect := SpeedUpEffect new.
+	aBoard := RoundBoard withOnly: { speedUpEffect } at: { 2 . 4 . 5 } Of: 5.
+	self assert: (aBoard boardEffects at: 2) equals: speedUpEffect.
+	self assert: (aBoard boardEffects at: 4) equals: speedUpEffect.
+	self assert: (aBoard boardEffects at: 5) equals: speedUpEffect.
+	
+]
+
+{ #category : #tests }
 ObjectCreationTests >> testARoundBoardCannotBeCreatedWithLessThanTwoPositions [
 
 	self
-		should: [ RoundBoard with: 1 on: 100 and: 0 ]
+		should: [ RoundBoard with: 1 on: (ParsecMeasure of: 100) ]
 		raise: Error
 		whoseDescriptionIncludes:
 		'A board cannot have less than two positions'
@@ -65,13 +77,13 @@ ObjectCreationTests >> testARoundBoardCannotBeCreatedWithLessThanTwoPositions [
 ObjectCreationTests >> testASpaceShipBeginsInPositionOne [
 
 	| aSpaceGame aBoard |
-	aBoard := RoundBoard with: 100 on: 100 and: 0.
+	aBoard := RoundBoard with: 100 on: (ParsecMeasure of: 100).
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
 		              rolling: ''
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	self
 		assert: 'Messi'
@@ -84,13 +96,13 @@ ObjectCreationTests >> testASpaceShipBeginsInPositionOne [
 ObjectCreationTests >> testSpaceShipsPlayingBeginAtLapOne [
 
 	| aSpaceGame aBoard |
-	aBoard := RoundBoard with: 100 on: 100 and: 0.
+	aBoard := RoundBoard with: 100 on: (ParsecMeasure of: 100).
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi'. 'De Paul' }
 		              on: aBoard
 		              rolling: ''
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	self
 		assert: 'Messi'
@@ -109,7 +121,7 @@ ObjectCreationTests >> testSpaceShipsPlayingBeginAtLapOne [
 ObjectCreationTests >> testTwoSpaceshipsWithTheSameNameCannotBeAddedToGame [
 
 	| aSpaceGame aBoard aDiceCup |
-	aBoard := RoundBoard with: 100 on: 100 and: 0.
+	aBoard := RoundBoard with: 100 on: (ParsecMeasure of: 100).
 	aDiceCup := DiceCup withAll: { '' }.
 
 	self

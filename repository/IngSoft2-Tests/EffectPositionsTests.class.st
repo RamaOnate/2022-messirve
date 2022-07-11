@@ -1,6 +1,6 @@
 Class {
 	#name : #EffectPositionsTests,
-	#superclass : #MessirveTests,
+	#superclass : #TestCase,
 	#category : #'IngSoft2-Tests'
 }
 
@@ -9,13 +9,13 @@ EffectPositionsTests >> testASpaceShipLandsOnAPositionWithoutEffectAndTheLapAndP
 
 	| aSpaceGame aLoadedDie aBoard |
 	aLoadedDie := LoadedDie rolling: { 5 }.
-	aBoard := RoundBoard withNoEffectsOf: 10 with: 100 and: 0.
+	aBoard := RoundBoard withNoEffectsOf: 10 with: 100.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -31,10 +31,10 @@ EffectPositionsTests >> testASpaceShipLandsOnASpeedUpAndThusFinishesLapOneAndIsN
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { SpeedUpEffect new }
+		          withOnly: { SpeedUpEffect new }
 		          at: { 2 }
 		          Of: 5
-		          with: 100 and: 0.
+		          with: 100.
 	aDie := LoadedDie rolling: { 1. 4 }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -42,7 +42,7 @@ EffectPositionsTests >> testASpaceShipLandsOnASpeedUpAndThusFinishesLapOneAndIsN
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 3
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -60,10 +60,10 @@ EffectPositionsTests >> testASpaceShipLandsOnASpeedUpPositionAndAdvancesFourSpac
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { SpeedUpEffect new }
+		          withOnly: { SpeedUpEffect new }
 		          at: { 2 }
 		          Of: 10
-		          with: 100 and: 0.
+		          with: 100.
 	aDie := LoadedDie rolling: { 1. 4 }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -71,7 +71,7 @@ EffectPositionsTests >> testASpaceShipLandsOnASpeedUpPositionAndAdvancesFourSpac
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 3
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -89,10 +89,10 @@ EffectPositionsTests >> testASpaceShipLandsOnAWormHolePositionAndCannotGoBackBeh
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { WormHoleEffect new }
+		          withOnly: { WormHoleEffect new }
 		          at: { 2 }
 		          Of: 5
-		          with: 100 and: 0.
+		          with: 100.
 	aDie := LoadedDie rolling: { 1 }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -100,7 +100,7 @@ EffectPositionsTests >> testASpaceShipLandsOnAWormHolePositionAndCannotGoBackBeh
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 3
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -117,10 +117,10 @@ EffectPositionsTests >> testASpaceShipLandsOnAWormHolePositionAndGoesBackFourSpa
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { WormHoleEffect new }
+		          withOnly: { WormHoleEffect new }
 		          at: { 2 }
 		          Of: 5
-		          with: 100 and: 0.
+		          with: 100.
 	aDie := LoadedDie rolling: { 6 }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -128,7 +128,7 @@ EffectPositionsTests >> testASpaceShipLandsOnAWormHolePositionAndGoesBackFourSpa
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 3
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -145,10 +145,10 @@ EffectPositionsTests >> testASpaceShipThatLandsOnAAtomicBombAfterFinishingTheFir
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { AtomicBombEffect new }
+		          withOnly: { AtomicBombEffect new }
 		          at: { 1 }
 		          Of: 3
-		          with: 100 and: 0.
+		          with: 100.
 	aDie := LoadedDie rolling: { 1. 1. 1. 2 }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -156,7 +156,7 @@ EffectPositionsTests >> testASpaceShipThatLandsOnAAtomicBombAfterFinishingTheFir
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.
@@ -202,10 +202,10 @@ EffectPositionsTests >> testASpaceShipThatLandsOnAAtomicBombTakesEverySpaceShipB
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { AtomicBombEffect new }
+		          withOnly: { AtomicBombEffect new }
 		          at: { 3 }
 		          Of: 4
-		          with: 100 and: 0.
+		          with: 100.
 	aDie := LoadedDie rolling: { 1 }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -213,7 +213,7 @@ EffectPositionsTests >> testASpaceShipThatLandsOnAAtomicBombTakesEverySpaceShipB
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.
@@ -263,12 +263,13 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAfterAnotherSpace
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
-		          { (HyperJumpEffect with: { 30. 20. 10 } and: { 0. 0. 0 }) }
+		          withOnly: { (HyperJumpEffect withAll: { 
+					           (ParsecMeasure of: 30).
+					           (LightYearMeasure of: 60).
+					           (ParsecMeasure of: 10) }) }
 		          at: { 2 }
 		          Of: 10
-		          with: 100
-		          and: 0.
+		          with: (ParsecMeasure of: 100).
 	aDiceCup := DiceCup withAll: { (LoadedDie rolling: { 1 }) }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -276,7 +277,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAfterAnotherSpace
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -300,12 +301,13 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAfterAnotherSpace
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
-		          { (HyperJumpEffect with: { 25. 15. 5 } and: { 15. 15. 15 }) }
+		          withOnly: { (HyperJumpEffect withAll: { 
+					           (ParsecMeasure of: 30).
+					           (LightYearMeasure of: 60).
+					           (LightYearMeasure of: 30) }) }
 		          at: { 2 }
 		          Of: 10
-		          with: 100
-		          and: 0.
+		          with: (ParsecMeasure of: 100).
 	aDiceCup := DiceCup withAll: { (LoadedDie rolling: { 1 }) }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -313,7 +315,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAfterAnotherSpace
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -337,12 +339,13 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAndAdvancesThirty
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
-		          { (HyperJumpEffect with: { 30. 20. 10 } and: { 0. 0. 0 }) }
+		          withOnly: { (HyperJumpEffect withAll: { 
+					           (ParsecMeasure of: 30).
+					           (LightYearMeasure of: 40).
+					           (LightYearMeasure of: 30) }) }
 		          at: { 2 }
 		          Of: 10
-		          with: 100
-		          and: 0.
+		          with: (ParsecMeasure of: 100).
 	aDiceCup := DiceCup withAll: { (LoadedDie rolling: { 1 }) }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -350,7 +353,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionAndAdvancesThirty
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -367,12 +370,11 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionButTheParsecsAwar
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
-		          { (HyperJumpEffect with: { 3 } and: { 0 }) }
+		          withOnly:
+		          { (HyperJumpEffect withAll: { (LightYearMeasure of: 15) }) }
 		          at: { 2 }
 		          Of: 10
-		          with: 100
-		          and: 0.
+		          with: (ParsecMeasure of: 100).
 	aDiceCup := DiceCup withAll: { (LoadedDie rolling: { 1 }) }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -380,7 +382,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionButTheParsecsAwar
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -397,12 +399,11 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionThatMovesItForwar
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
-		          { (HyperJumpEffect with: { 10 } and: { 0 }) }
+		          withOnly:
+		          { (HyperJumpEffect withAll: { (ParsecMeasure of: 10) }) }
 		          at: { 10 }
 		          Of: 10
-		          with: 100
-		          and: 0.
+		          with: (ParsecMeasure of: 100).
 	aDiceCup := DiceCup withAll: { (LoadedDie rolling: { 9 }) }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -410,7 +411,7 @@ EffectPositionsTests >> testASpaceshipLandsOnAHyperJumpPositionThatMovesItForwar
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -426,12 +427,12 @@ EffectPositionsTests >> testASpaceshipThatMovesForwardFourAfterLandingOnASpeedUp
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly: { 
+		          withOnly: { 
 				          SpeedUpEffect new.
 				          WormHoleEffect new }
 		          at: { 2. 6 }
 		          Of: 7
-		          with: 100 and: 0.
+		          with: 100.
 	aDiceCup := DiceCup withAll: { (LoadedDie rolling: { 1 }) }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -439,7 +440,7 @@ EffectPositionsTests >> testASpaceshipThatMovesForwardFourAfterLandingOnASpeedUp
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 
@@ -456,10 +457,10 @@ EffectPositionsTests >> testSpaceShipLandsOnAMoonWalkAndMovesBackThreePositionsE
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { (MoonWalkEffect takingBack: 1) }
+		          withOnly: { (MoonWalkEffect takingBack: 1) }
 		          at: { 3 }
 		          Of: 5
-		          with: 100 and: 0.
+		          with: 100.
 	aDie := LoadedDie rolling: { 1 }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -467,7 +468,7 @@ EffectPositionsTests >> testSpaceShipLandsOnAMoonWalkAndMovesBackThreePositionsE
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.
@@ -497,10 +498,10 @@ EffectPositionsTests >> testSpaceShipLandsOnAMoonWalkAndMovesEveryOtherSpaceShip
 
 	| aSpaceGame aBoard aDie |
 	aBoard := RoundBoard
-		          boardWithOnly: { (MoonWalkEffect takingBack: 3) }
+		          withOnly: { (MoonWalkEffect takingBack: 3) }
 		          at: { 2 }
 		          Of: 10
-		          with: 100 and: 0.
+		          with: 100.
 	aDie := LoadedDie rolling: { 10. 10. 10. 1 }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -508,7 +509,7 @@ EffectPositionsTests >> testSpaceShipLandsOnAMoonWalkAndMovesEveryOtherSpaceShip
 		              on: aBoard
 		              rolling: aDie
 		              withLapsToWin: 5
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.
@@ -554,12 +555,13 @@ EffectPositionsTests >> testSpaceShipsLandOnHyperJumpPositionFourTimesAndTheLast
 
 	| aSpaceGame aBoard aDiceCup |
 	aBoard := RoundBoard
-		          boardWithOnly:
-		          { (HyperJumpEffect with: { 30. 20. 10 } and: { 0. 0. 0 }) }
+		          withOnly: { (HyperJumpEffect withAll: { 
+					           (ParsecMeasure of: 30).
+					           (LightYearMeasure of: 60).
+					           (LightYearMeasure of: 30) }) }
 		          at: { 2 }
 		          Of: 10
-		          with: 100
-		          and: 0.
+		          with: (ParsecMeasure of: 100).
 	aDiceCup := DiceCup withAll: { (LoadedDie rolling: { 1 }) }.
 
 	aSpaceGame := MessirveSpaceRaceGame
@@ -567,7 +569,7 @@ EffectPositionsTests >> testSpaceShipsLandOnHyperJumpPositionFourTimesAndTheLast
 		              on: aBoard
 		              rolling: aDiceCup
 		              withLapsToWin: 2
-		              handing: { SpeedCard new }.
+		              handing: (InfiniteDeck madeOf: { SpeedCard new }).
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.

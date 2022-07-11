@@ -38,6 +38,12 @@ EnginePowerApplicator >> applyRepeatTargetting: aTarget in: aCardApplicator from
 	aCardApplicator applyRepeatTargetting: aTarget from: aGame
 ]
 
+{ #category : #private }
+EnginePowerApplicator >> applySpeedBoostTargetting: aCard in: aCardApplicator from: aGame [ 
+
+	aCardApplicator applyDoubledCardsOf: aCard from: aGame
+]
+
 { #category : #accessing }
 EnginePowerApplicator >> engineOf: aSpaceShip [
 
