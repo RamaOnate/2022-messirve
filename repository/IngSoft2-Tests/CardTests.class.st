@@ -25,14 +25,17 @@ CardTests >> testASpaceShipBeginsTheGameWithTwoCards [
 { #category : #tests }
 CardTests >> testASpaceShipCannotPlayACancellationCardOnAnotherCancellationCard [
 
-	| aSpaceGame aLoadedDie aBoard cancellationCardOne cancellationCardTwo speedCard |
+	| aSpaceGame aLoadedDie aBoard cancellationCardOne cancellationCardTwo speedCard infiniteDeck |
 	aLoadedDie := LoadedDie rolling: { 1 }.
 	cancellationCardOne := CancellationCard new.
 	cancellationCardTwo := CancellationCard new.
 	speedCard := SpeedCard new.
+	infiniteDeck := InfiniteDeck madeOf: { 
+			                cancellationCardOne.
+			                speedCard.
+			                cancellationCardTwo }.
 	aBoard := RoundBoard
-		          withOnly:
-		          { (CardDealerEffect handing: cancellationCardTwo) }
+		          withOnly: { (CardDealerEffect handing: infiniteDeck) }
 		          at: { 3 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -40,9 +43,7 @@ CardTests >> testASpaceShipCannotPlayACancellationCardOnAnotherCancellationCard 
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: (InfiniteDeck madeOf: { 
-				              cancellationCardOne.
-				              speedCard }).
+		              handing: infiniteDeck.
 
 	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Messi'.
 	aSpaceGame playNextTurn.
@@ -120,12 +121,13 @@ CardTests >> testASpaceShipCannotPlayARedoCardOnASpeedCardDuringATurnThatIsNotTh
 { #category : #tests }
 CardTests >> testASpaceShipLandsOnAPositionHandingASpeedCardAndNowHasThreeCards [
 
-	| aSpaceGame aLoadedDie aBoard overloadCard speedCard |
+	| aSpaceGame aLoadedDie aBoard overloadCard speedCard deck |
 	aLoadedDie := LoadedDie rolling: { 1 }.
 	overloadCard := OverloadCard new.
 	speedCard := SpeedCard new.
+	deck := InfiniteDeck madeOf: { overloadCard . overloadCard . speedCard }.
 	aBoard := RoundBoard
-		          withOnly: { (CardDealerEffect handing: speedCard) }
+		          withOnly: { (CardDealerEffect handingFrom: deck) }
 		          at: { 2 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -133,7 +135,7 @@ CardTests >> testASpaceShipLandsOnAPositionHandingASpeedCardAndNowHasThreeCards 
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: (InfiniteDeck madeOf: { overloadCard }).
+		              handing: deck.
 	aSpaceGame playNextTurn.
 
 	self assert: (aSpaceGame inventoryFrom: 'Messi') equals: { 
@@ -145,14 +147,15 @@ CardTests >> testASpaceShipLandsOnAPositionHandingASpeedCardAndNowHasThreeCards 
 { #category : #tests }
 CardTests >> testASpaceShipLandsOnAPositionHandingASpeedCardTwiceAndNowHasFourCards [
 
-	| aSpaceGame aLoadedDie aBoard overloadCard speedCard |
+	| aSpaceGame aLoadedDie aBoard overloadCard speedCard deck |
 	aLoadedDie := LoadedDie rolling: { 1 }.
 	overloadCard := OverloadCard new.
 	speedCard := SpeedCard new.
+	deck := InfiniteDeck madeOf:{ overloadCard . overloadCard . speedCard . speedCard }.
 	aBoard := RoundBoard
 		          withOnly: { 
-				          (CardDealerEffect handing: speedCard).
-				          (CardDealerEffect handing: speedCard) }
+				          (CardDealerEffect handingFrom: deck).
+				          (CardDealerEffect handingFrom: deck) }
 		          at: { 2. 3 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -160,7 +163,7 @@ CardTests >> testASpaceShipLandsOnAPositionHandingASpeedCardTwiceAndNowHasFourCa
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: (InfiniteDeck madeOf:{ overloadCard }).
+		              handing: deck.
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.
 
@@ -201,6 +204,35 @@ CardTests >> testASpaceShipLandsOnASpeedUpAndAdvancesToAPositionHandingSpeedCard
 	self assert: (aSpaceGame inventoryFrom: 'Messi') equals: { 
 			overloadCard.
 			overloadCard } asOrderedCollection
+]
+
+{ #category : #tests }
+CardTests >> testASpaceShipPlaysACancellationCardOnOneOfTheTwoActiveSpeedCardsAndBothAreRemoved [
+
+	| aSpaceGame aLoadedDie aBoard speedCard cancellationCard deck |
+	aLoadedDie := LoadedDie rolling: { 2 }.
+	speedCard := SpeedCard new.
+	cancellationCard := CancellationCard new.
+	deck := InfiniteDeck madeOf: { 
+			        speedCard.
+			        cancellationCard.
+			        speedCard }.
+	aBoard := RoundBoard
+		          withOnly: { (CardDealerEffect handingFrom: deck) }
+		          at: { 3 }
+		          Of: 100.
+	aSpaceGame := MessirveSpaceRaceGame
+		              playedBy: { 'Messi' }
+		              on: aBoard
+		              rolling: aLoadedDie
+		              withLapsToWin: 2
+		              handing: deck.
+
+	aSpaceGame playNextTurn.
+	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Messi'.
+	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Messi'.
+	aSpaceGame spaceShip: 'Messi' plays: cancellationCard on: speedCard.
+	self assert: (aSpaceGame inventoryFrom: 'Messi') isEmpty
 ]
 
 { #category : #tests }
@@ -462,16 +494,21 @@ CardTests >> testASpaceShipPlaysARedoCardAfterACancellationWasPlayedAndTheRedoCa
 { #category : #tests }
 CardTests >> testASpaceShipPlaysARedoCardAfterACancellationWasUsedOnASpeedAndTheRedoCancellsTheLastSpeed [
 
-	| aSpaceGame aLoadedDie aBoard speedCard1 speedCard2 redoCard cancellationCard |
+	| aSpaceGame aLoadedDie aBoard speedCard1 speedCard2 redoCard cancellationCard deck |
 	aLoadedDie := LoadedDie rolling: { 1 }.
 	speedCard1 := SpeedCard new.
 	speedCard2 := SpeedCard new.
 	redoCard := RedoCard new.
 	cancellationCard := CancellationCard new.
+	deck := InfiniteDeck madeOf: { 
+			        speedCard1.
+			        speedCard2.
+			        redoCard.
+			        cancellationCard }.
 	aBoard := RoundBoard
 		          withOnly: { 
-				          (CardDealerEffect handing: redoCard).
-				          (CardDealerEffect handing: cancellationCard) }
+				          (CardDealerEffect handingFrom: deck).
+				          (CardDealerEffect handingFrom: deck) }
 		          at: { 2. 3 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -479,9 +516,7 @@ CardTests >> testASpaceShipPlaysARedoCardAfterACancellationWasUsedOnASpeedAndThe
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 3
-		              handing: (InfiniteDeck madeOf: { 
-					               speedCard1.
-					               speedCard2 }).
+		              handing: deck.
 
 	aSpaceGame playNextTurn.
 	aSpaceGame playNextTurn.
@@ -525,12 +560,16 @@ CardTests >> testASpaceShipPlaysARedoCardAfterACancellationWasUsedOnASpeedAndThe
 { #category : #tests }
 CardTests >> testASpaceShipPlaysARedoCardAfterARedoCardAndStillAppliesTheSpeedCardFirstlyPlayed [
 
-	| aSpaceGame aLoadedDie aBoard speedCard redoCard |
+	| aSpaceGame aLoadedDie aBoard speedCard redoCard deck |
 	aLoadedDie := LoadedDie rolling: { 1 }.
 	speedCard := SpeedCard new.
 	redoCard := RedoCard new.
+	deck := InfiniteDeck madeOf: { 
+			        speedCard.
+			        redoCard.
+			        redoCard }.
 	aBoard := RoundBoard
-		          withOnly: { (CardDealerEffect handing: redoCard) }
+		          withOnly: { (CardDealerEffect handingFrom: deck) }
 		          at: { 2 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -538,9 +577,7 @@ CardTests >> testASpaceShipPlaysARedoCardAfterARedoCardAndStillAppliesTheSpeedCa
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 3
-		              handing: (InfiniteDeck madeOf: { 
-					               speedCard.
-					               redoCard }).
+		              handing: deck.
 
 	aSpaceGame playNextTurn.
 
@@ -651,14 +688,19 @@ CardTests >> testASpaceShipPlaysARedoCardButIsNotSavedAsLastCardPlayed [
 { #category : #tests }
 CardTests >> testASpaceShipPlaysARedoCardThreeTimesAfterAnOverloadCardWasPlayedAndNextTurnGoesBackOneLap [
 
-	| aSpaceGame aLoadedDie aBoard overloadCard redoCard |
+	| aSpaceGame aLoadedDie aBoard overloadCard redoCard deck |
 	aLoadedDie := LoadedDie rolling: { 1 }.
 	overloadCard := OverloadCard new.
 	redoCard := RedoCard new.
+	deck := InfiniteDeck madeOf: { 
+			        overloadCard.
+			        redoCard.
+			        redoCard.
+			        redoCard }.
 	aBoard := RoundBoard
 		          withOnly: { 
-				          (CardDealerEffect handing: redoCard).
-				          (CardDealerEffect handing: redoCard) }
+				          (CardDealerEffect handingFrom: deck).
+				          (CardDealerEffect handingFrom: deck) }
 		          at: { 2. 3 }
 		          Of: 5.
 	aSpaceGame := MessirveSpaceRaceGame
@@ -666,9 +708,7 @@ CardTests >> testASpaceShipPlaysARedoCardThreeTimesAfterAnOverloadCardWasPlayedA
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 3
-		              handing: (InfiniteDeck madeOf: { 
-					               overloadCard.
-					               redoCard }).
+		              handing: deck.
 
 	1 to: 5 do: [ :i | aSpaceGame playNextTurn ].
 
@@ -722,6 +762,49 @@ CardTests >> testASpaceShipPlaysARepeatCardAndAdvancesFourTilesBecauseASpeedUpWa
 		assert: 'Messi'
 		isAt: 5
 		with: 2
+		in: aSpaceGame
+]
+
+{ #category : #tests }
+CardTests >> testASpaceShipPlaysASpeedCardOnAnotherSpaceShipAndItselfAndAnotherSpaceShipPlaysASpeedBoostAndBothGetDoubleEffect [
+
+	| aSpaceGame aLoadedDie aBoard speedCard deck speedBoost |
+	aLoadedDie := LoadedDie rolling: { 2 }.
+	speedCard := SpeedCard new.
+	speedBoost := SpeedBoostCard new.
+	deck := InfiniteDeck madeOf: { 
+			        speedCard.
+			        speedBoost.
+			        speedCard.
+			        speedBoost }.
+	aBoard := RoundBoard
+		          withOnly: { (CardDealerEffect handingFrom: deck) }
+		          at: { 3 }
+		          Of: 100.
+	aSpaceGame := MessirveSpaceRaceGame
+		              playedBy: { 'Messi'. 'Armani' }
+		              on: aBoard
+		              rolling: aLoadedDie
+		              withLapsToWin: 2
+		              handing: deck.
+
+	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Messi'.
+	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Armani'.
+	aSpaceGame spaceShip: 'Armani' plays: speedBoost on: speedCard.
+	aSpaceGame playNextTurn.
+
+	self
+		assert: 'Messi'
+		isAt: 5
+		with: 1
+		in: aSpaceGame.
+
+	aSpaceGame playNextTurn.
+
+	self
+		assert: 'Armani'
+		isAt: 5
+		with: 1
 		in: aSpaceGame
 ]
 
@@ -915,21 +998,57 @@ CardTests >> testASpaceShipPlaysAnOverloadCardOnItselfAndHasOnlyOneCardLeft [
 ]
 
 { #category : #tests }
-CardTests >> testASpaceShipPlaysTwoSpeedCardsOnItSelfPlaysTheTurnReceivesASpeedCardPlaysTheNewlyReceivedSpeedCardPlaysTheNextTurnAndAdvancesOneLap [
+CardTests >> testASpaceShipPlaysSpeedBoostOnASpeedCardAndAdvancesTwoSpaces [
 
-	| aSpaceGame aLoadedDie aBoard speedCard |
-	aLoadedDie := LoadedDie rolling: { 1 }.
+	| aSpaceGame aLoadedDie aBoard speedCard deck speedBoost|
+	aLoadedDie := LoadedDie rolling: { 2 }.
 	speedCard := SpeedCard new.
+	speedBoost := SpeedBoostCard new.
+	deck := InfiniteDeck madeOf: { 
+			        speedCard.
+			        speedBoost }.
 	aBoard := RoundBoard
-		          withOnly: { (CardDealerEffect handing: speedCard) }
-		          at: { 4 }
-		          Of: 7.
+		          withOnly: { (CardDealerEffect handingFrom: deck) }
+		          at: { 3 }
+		          Of: 100.
 	aSpaceGame := MessirveSpaceRaceGame
 		              playedBy: { 'Messi' }
 		              on: aBoard
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
-		              handing: (InfiniteDeck madeOf: { speedCard }).
+		              handing: deck.
+
+	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Messi'.
+	aSpaceGame spaceShip: 'Messi' plays: speedBoost on: speedCard.
+	aSpaceGame playNextTurn.
+
+	self
+		assert: 'Messi'
+		isAt: 5
+		with: 1
+		in: aSpaceGame
+]
+
+{ #category : #tests }
+CardTests >> testASpaceShipPlaysTwoSpeedCardsOnItSelfPlaysTheTurnReceivesASpeedCardPlaysTheNewlyReceivedSpeedCardPlaysTheNextTurnAndAdvancesOneLap [
+
+	| aSpaceGame aLoadedDie aBoard speedCard deck |
+	aLoadedDie := LoadedDie rolling: { 1 }.
+	speedCard := SpeedCard new.
+	deck := InfiniteDeck madeOf: { 
+			        speedCard.
+			        speedCard }.
+	aBoard := RoundBoard
+		          withOnly: { (CardDealerEffect handingFrom: deck) }
+		          at: { 4 }
+		          Of: 7.
+
+	aSpaceGame := MessirveSpaceRaceGame
+		              playedBy: { 'Messi' }
+		              on: aBoard
+		              rolling: aLoadedDie
+		              withLapsToWin: 2
+		              handing: deck.
 
 	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Messi'.
 	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Messi'.

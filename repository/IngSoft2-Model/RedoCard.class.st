@@ -26,5 +26,5 @@ RedoCard >> inventoriesAfterTargeting: target from: inventories on: aBoard [
 { #category : #asserting }
 RedoCard >> playOf: cardPlayer at: cardTarget on: aCardApplicator from: aGame [
 
-	aCardApplicator handleRedoFrom: cardPlayer in: aGame
+	aCardApplicator handleRedoFrom: cardPlayer of: self in: aGame
 ]

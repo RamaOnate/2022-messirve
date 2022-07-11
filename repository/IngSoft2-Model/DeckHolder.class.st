@@ -20,6 +20,12 @@ DeckHolder >> cards [
 	^ cards
 ]
 
+{ #category : #accessing }
+DeckHolder >> discardPile [
+
+	^ discardPile
+]
+
 { #category : #initialization }
 DeckHolder >> initializeFormedBy: someCards [
 
@@ -27,14 +33,24 @@ DeckHolder >> initializeFormedBy: someCards [
 	discardPile := OrderedCollection new.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 DeckHolder >> pickOne [
 
+	| cardPicked |
 	cards isEmpty
 		ifTrue: [ 
-			cards := discardPile shuffle.
-			discardPile := discardPile removeAll ]
-		ifFalse: [ 
-			discardPile add: cards first.
-			cards removeFirst ]
+			discardPile isEmpty
+				ifFalse: [ 
+					cards := discardPile shuffle.
+					discardPile := discardPile removeAll.
+					cardPicked := cards removeFirst ]
+				ifTrue: [ Error signal: 'No cards available to pick up' ] ]
+		ifFalse: [ cardPicked := cards removeFirst ].
+	^ cardPicked
+]
+
+{ #category : #'as yet unclassified' }
+DeckHolder >> putAway: aCard [
+
+	discardPile add: aCard
 ]

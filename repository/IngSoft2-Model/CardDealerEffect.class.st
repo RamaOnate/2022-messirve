@@ -19,6 +19,12 @@ CardDealerEffect class >> handing: aCard [
 	^ self createHanding: aCard
 ]
 
+{ #category : #'as yet unclassified' }
+CardDealerEffect class >> handingFrom: aDeck [ 
+	
+	^ self createHanding: aDeck
+]
+
 { #category : #initialization }
 CardDealerEffect class >> handingRandomCards [
 
@@ -28,7 +34,11 @@ CardDealerEffect class >> handingRandomCards [
 { #category : #private }
 CardDealerEffect >> applyOn: statuses activatedBy: aStatus playedOn: aBoard and: aGame appliedBy: effectApplicator [
 
-	^ effectApplicator applyCardDealerEffectTo: aStatus with: (card atRandom) from: statuses playedOn: aGame
+	^ effectApplicator
+		  applyCardDealerEffectTo: aStatus
+		  with: (card at: 1) pickOne
+		  from: statuses
+		  playedOn: aGame
 ]
 
 { #category : #initialization }

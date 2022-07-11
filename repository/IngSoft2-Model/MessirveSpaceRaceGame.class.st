@@ -74,7 +74,7 @@ MessirveSpaceRaceGame class >> playedBy: spaceShips on: aBoard rolling: aDiceCup
 MessirveSpaceRaceGame class >> randomlyDistributedInfiniteDeck [
 
 	| randomDeck |
-	randomDeck := InfiniteDeck withRandom: 100.
+	randomDeck := InfiniteDeck with: 100.
 
 	^ randomDeck
 ]

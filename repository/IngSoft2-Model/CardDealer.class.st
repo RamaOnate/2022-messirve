@@ -43,3 +43,9 @@ CardDealer >> inventoriesAfterDrawingTwoFrom: inventories [
 	^ inventoriesAfterDrawingOne collect: [ :inventory | 
 		  self handCardFromDeckTo: inventory ]
 ]
+
+{ #category : #'as yet unclassified' }
+CardDealer >> putAway: aCard [
+
+	deck putAway: aCard
+]

@@ -34,6 +34,31 @@ CardApplicator >> applyAllNegatedCardsOf: aCard [
 			aCard applyNegatedOn: card on: engineApplicator from: self ] ]
 ]
 
+{ #category : #'as yet unclassified' }
+CardApplicator >> applyDoubledCardsOf: aCard [ 
+
+	inventories do: [ :inventory | self applyDoubleOf: aCard from: inventory ].
+
+	globalInventory do: [ :card | 
+		card = aCard ifTrue: [ 
+			aCard applyDoubledOn: card on: engineApplicator from: self ] ]
+]
+
+{ #category : #'as yet unclassified' }
+CardApplicator >> applyDoubledCardsOf: aCard from: aGame [
+
+	inventories do: [ :inventory | 
+		self doubleEffectOf: aCard from: inventory in: aGame ].
+
+	globalInventory do: [ :card | 
+		card = aCard ifTrue: [ 
+			aCard
+				activatedTo: self
+				poweredBy: engineApplicator
+				on: self
+				from: aGame ] ]
+]
+
 { #category : #private }
 CardApplicator >> applyNegatedAndRemove: aCard from: inventory [
 
@@ -112,6 +137,18 @@ CardApplicator >> distributeInitialCardsTo: spaceShipNames [
 	inventories := cardDealer inventoriesAfterDrawingTwoFrom: inventories
 ]
 
+{ #category : #'as yet unclassified' }
+CardApplicator >> doubleEffectOf: aCard from: inventory in: aGame [
+
+	inventory activeCards do: [ :card | 
+		card = aCard ifTrue: [ 
+			aCard
+				activatedTo: inventory spaceShip
+				poweredBy: engineApplicator
+				on: self
+				from: aGame ] ]
+]
+
 { #category : #accessing }
 CardApplicator >> enginePowerOf: aSpaceShip [ 
 
@@ -123,11 +160,13 @@ CardApplicator >> handleCancellationOf: aCancellation to: cardTarget [
 
 	self assertThereAreActiveCardsInPlay.
 	self assertCardIsActive: cardTarget.
-	self handleInstantaneousOf: aCancellation
+	self handleInstantaneousOf: aCancellation.
+	cardDealer putAway: cardTarget.
+	cardDealer putAway: aCancellation
 ]
 
 { #category : #private }
-CardApplicator >> handleInstantaneousOf: aCard [ 
+CardApplicator >> handleInstantaneousOf: aCard [
 
 	self makeLastPlayed: aCard
 ]
@@ -139,10 +178,11 @@ CardApplicator >> handlePermanentPlayOf: aCard from: cardPlayer on: aGame [
 	self makeLastPlayed: aCard
 ]
 
-{ #category : #private }
-CardApplicator >> handleRedoFrom: cardPlayer in: aGame [
+{ #category : #'as yet unclassified' }
+CardApplicator >> handleRedoFrom: cardPlayer of: aCard in: aGame [
 
-	aGame assertPermanentPlayedOnCorrectlyBy: cardPlayer
+	aGame assertPermanentPlayedOnCorrectlyBy: cardPlayer.
+	cardDealer putAway: aCard
 ]
 
 { #category : #initialization }
@@ -164,6 +204,17 @@ CardApplicator >> inventoriesAfter: cardTarget wasApplied: aCard [
 		                         inventory spaceShip == cardTarget ].
 	inventoryOfCardTarget addCardToActiveCards: aCard.
 	^ inventories
+]
+
+{ #category : #'as yet unclassified' }
+CardApplicator >> inventoriesAfterAdding: aCard from: someInventories [
+
+	| newInventories |
+	newInventories := someInventories do: [ :inventory | 
+		                  inventory activeCards do: [ :card | 
+			                  card == aCard ifTrue: [ 
+				                  inventory addCardToActiveCards: aCard ] ] ].
+	^ newInventories
 ]
 
 { #category : #accessing }

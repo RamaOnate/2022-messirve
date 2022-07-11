@@ -9,12 +9,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-InfiniteDeck class >> madeOf: cards [
-
-	^ self new initializeMadeOf: cards
-]
-
-{ #category : #'as yet unclassified' }
 InfiniteDeck class >> randomCardAssignation [
 
 	| source cancellationCard discreteProbabilityDistribution accelerationCard overloadCard speedCard redoCard repeatCard probabilityEvents |
@@ -46,17 +40,11 @@ InfiniteDeck class >> randomCardAssignation [
 ]
 
 { #category : #'as yet unclassified' }
-InfiniteDeck class >> withRandom: amountOfCards [
+InfiniteDeck class >> with: amountOfCards [
 
 	| source |
 	source := self randomCardAssignation.
 	^ self new initializeMadeOf: (source next: 100)
-]
-
-{ #category : #accessing }
-InfiniteDeck >> cards [
-
-	^ cards
 ]
 
 { #category : #initialization }
@@ -73,4 +61,10 @@ InfiniteDeck >> pickOne [
 	cardPicked := cards at: cardSequence currentSequenceNumber.
 	cardSequence next.
 	^ cardPicked
+]
+
+{ #category : #'as yet unclassified' }
+InfiniteDeck >> putAway: aCard [
+
+	^ self
 ]
