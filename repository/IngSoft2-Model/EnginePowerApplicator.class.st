@@ -38,7 +38,7 @@ EnginePowerApplicator >> applyRepeatTargetting: aTarget in: aCardApplicator from
 	aCardApplicator applyRepeatTargetting: aTarget from: aGame
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 EnginePowerApplicator >> applySpeedBoostTargetting: aCard in: aCardApplicator from: aGame [ 
 
 	aCardApplicator applyDoubledCardsOf: aCard from: aGame

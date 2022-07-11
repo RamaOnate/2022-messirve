@@ -19,7 +19,7 @@ CardDealerEffect class >> handing: aCard [
 	^ self createHanding: aCard
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 CardDealerEffect class >> handingFrom: aDeck [ 
 	
 	^ self createHanding: aDeck

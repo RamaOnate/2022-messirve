@@ -8,7 +8,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #event }
 InfiniteDeck class >> randomCardAssignation [
 
 	| source cancellationCard discreteProbabilityDistribution accelerationCard overloadCard speedCard redoCard repeatCard probabilityEvents |
@@ -39,7 +39,7 @@ InfiniteDeck class >> randomCardAssignation [
 	^ source
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 InfiniteDeck class >> with: amountOfCards [
 
 	| source |
@@ -54,7 +54,7 @@ InfiniteDeck >> initializeMadeOf: someCards [
 	cardSequence := Sequence formedBy: someCards
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 InfiniteDeck >> pickOne [
 
 	| cardPicked |
@@ -63,7 +63,7 @@ InfiniteDeck >> pickOne [
 	^ cardPicked
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 InfiniteDeck >> putAway: aCard [
 
 	^ self

@@ -57,7 +57,7 @@ DeckHolder >> pickOne [
 	^ cardPicked
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 DeckHolder >> putAway: aCard [
 
 	discardPile add: aCard

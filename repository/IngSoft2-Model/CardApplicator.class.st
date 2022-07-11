@@ -34,7 +34,7 @@ CardApplicator >> applyAllNegatedCardsOf: aCard [
 			aCard applyNegatedOn: card on: engineApplicator from: self ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 CardApplicator >> applyDoubledCardsOf: aCard from: aGame [
 
 	inventories do: [ :inventory | 
@@ -127,7 +127,7 @@ CardApplicator >> distributeInitialCardsTo: spaceShipNames [
 	inventories := cardDealer inventoriesAfterDrawingTwoFrom: inventories
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 CardApplicator >> doubleEffectOf: aCard from: inventory in: aGame [
 
 	inventory activeCards do: [ :card | 
@@ -168,7 +168,7 @@ CardApplicator >> handlePermanentPlayOf: aCard from: cardPlayer on: aGame [
 	self makeLastPlayed: aCard
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 CardApplicator >> handleRedoFrom: cardPlayer of: aCard in: aGame [
 
 	aGame assertPermanentPlayedOnCorrectlyBy: cardPlayer.
@@ -196,7 +196,7 @@ CardApplicator >> inventoriesAfter: cardTarget wasApplied: aCard [
 	^ inventories
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 CardApplicator >> inventoriesAfterAdding: aCard from: someInventories [
 
 	| newInventories |

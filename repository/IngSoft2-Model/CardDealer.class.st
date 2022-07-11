@@ -44,7 +44,7 @@ CardDealer >> inventoriesAfterDrawingTwoFrom: inventories [
 		  self handCardFromDeckTo: inventory ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 CardDealer >> putAway: aCard [
 
 	deck putAway: aCard

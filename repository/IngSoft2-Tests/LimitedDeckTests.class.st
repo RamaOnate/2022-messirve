@@ -128,3 +128,18 @@ LimitedDeckTests >> testAcardDealerEffectHandsInACardThatIsInTheDeckAndAddsItToT
 			cancellationCard.
 			overloadCard } asOrderedCollection 
 ]
+
+{ #category : #tests }
+LimitedDeckTests >> testDiscardPileBeginsEmptyAndDeckHasTwoCardsWhenInitiated [
+
+	| cancellationCard overloadCard limitedDeck |
+
+	overloadCard := OverloadCard new.
+	cancellationCard := CancellationCard new.
+	limitedDeck := DeckHolder formedBy: { 
+			               cancellationCard.
+			               overloadCard }.
+
+	self assert: limitedDeck cards equals: { cancellationCard . overloadCard } asOrderedCollection.
+	self assert: limitedDeck discardPile isEmpty.
+]
