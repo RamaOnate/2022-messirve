@@ -766,49 +766,6 @@ CardTests >> testASpaceShipPlaysARepeatCardAndAdvancesFourTilesBecauseASpeedUpWa
 ]
 
 { #category : #tests }
-CardTests >> testASpaceShipPlaysASpeedCardOnAnotherSpaceShipAndItselfAndAnotherSpaceShipPlaysASpeedBoostAndBothGetDoubleEffect [
-
-	| aSpaceGame aLoadedDie aBoard speedCard deck speedBoost |
-	aLoadedDie := LoadedDie rolling: { 2 }.
-	speedCard := SpeedCard new.
-	speedBoost := SpeedBoostCard new.
-	deck := InfiniteDeck madeOf: { 
-			        speedCard.
-			        speedBoost.
-			        speedCard.
-			        speedBoost }.
-	aBoard := RoundBoard
-		          withOnly: { (CardDealerEffect handingFrom: deck) }
-		          at: { 3 }
-		          Of: 100.
-	aSpaceGame := MessirveSpaceRaceGame
-		              playedBy: { 'Messi'. 'Armani' }
-		              on: aBoard
-		              rolling: aLoadedDie
-		              withLapsToWin: 2
-		              handing: deck.
-
-	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Messi'.
-	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Armani'.
-	aSpaceGame spaceShip: 'Armani' plays: speedBoost on: speedCard.
-	aSpaceGame playNextTurn.
-
-	self
-		assert: 'Messi'
-		isAt: 5
-		with: 1
-		in: aSpaceGame.
-
-	aSpaceGame playNextTurn.
-
-	self
-		assert: 'Armani'
-		isAt: 5
-		with: 1
-		in: aSpaceGame
-]
-
-{ #category : #tests }
 CardTests >> testASpaceShipPlaysASpeedCardOnAnotherSpaceShipAndTheOtherSpaceShipAdvancesOneExtraSpacePerTurn [
 
 	| aSpaceGame aLoadedDie aBoard speedCard |
@@ -998,6 +955,114 @@ CardTests >> testASpaceShipPlaysAnOverloadCardOnItselfAndHasOnlyOneCardLeft [
 ]
 
 { #category : #tests }
+CardTests >> testASpaceShipPlaysSpeedBoostCardOnAnotherSpaceShipAndItselfAndAnotherSpaceShipPlaysASpeedBoostAndBothGetDoubleEffect [
+
+	| aSpaceGame aLoadedDie aBoard speedCard deck speedBoost |
+	aLoadedDie := LoadedDie rolling: { 2 }.
+	speedCard := SpeedCard new.
+	speedBoost := SpeedBoostCard new.
+	deck := InfiniteDeck madeOf: { 
+			        speedCard.
+			        speedBoost.
+			        speedCard.
+			        speedBoost }.
+	aBoard := RoundBoard
+		          withOnly: { (CardDealerEffect handingFrom: deck) }
+		          at: { 3 }
+		          Of: 100.
+	aSpaceGame := MessirveSpaceRaceGame
+		              playedBy: { 'Messi'. 'Armani' }
+		              on: aBoard
+		              rolling: aLoadedDie
+		              withLapsToWin: 2
+		              handing: deck.
+
+	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Messi'.
+	aSpaceGame spaceShip: 'Messi' plays: speedCard on: 'Armani'.
+	aSpaceGame spaceShip: 'Armani' plays: speedBoost on: speedCard.
+	aSpaceGame playNextTurn.
+
+	self
+		assert: 'Messi'
+		isAt: 5
+		with: 1
+		in: aSpaceGame.
+
+	aSpaceGame playNextTurn.
+
+	self
+		assert: 'Armani'
+		isAt: 5
+		with: 1
+		in: aSpaceGame
+]
+
+{ #category : #tests }
+CardTests >> testASpaceShipPlaysSpeedBoostOnAAccelerationCardAndNextTurnAdvancesTwoExtra [
+
+	| aSpaceGame aLoadedDie aBoard accelerationCard deck speedBoost |
+	aLoadedDie := LoadedDie rolling: { 2 }.
+	accelerationCard := AccelerationCard new.
+	speedBoost := SpeedBoostCard new.
+	deck := InfiniteDeck madeOf: { 
+			        accelerationCard.
+			        speedBoost }.
+	aBoard := RoundBoard
+		          withOnly: { (CardDealerEffect handingFrom: deck) }
+		          at: { 3 }
+		          Of: 100.
+	aSpaceGame := MessirveSpaceRaceGame
+		              playedBy: { 'Messi' }
+		              on: aBoard
+		              rolling: aLoadedDie
+		              withLapsToWin: 2
+		              handing: deck.
+
+	aSpaceGame spaceShip: 'Messi' plays: accelerationCard on: 'Messi'.
+	aSpaceGame spaceShip: 'Messi' plays: speedBoost on: accelerationCard.
+	aSpaceGame playNextTurn.
+
+	self
+		assert: 'Messi'
+		isAt: 5
+		with: 1
+		in: aSpaceGame
+]
+
+{ #category : #tests }
+CardTests >> testASpaceShipPlaysSpeedBoostOnAOverloadCardAndNextTurnAdvancesOnlyTwoSpaces [
+
+	| aSpaceGame aLoadedDie aBoard overloadCard deck speedBoost |
+	aLoadedDie := LoadedDie rolling: { 6 }.
+	overloadCard := OverloadCard new.
+	speedBoost := SpeedBoostCard new.
+	deck := InfiniteDeck madeOf: { 
+			        overloadCard.
+			        speedBoost }.
+	aBoard := RoundBoard
+		          withOnly: { (CardDealerEffect handingFrom: deck) }
+		          at: { 3 }
+		          Of: 100.
+	aSpaceGame := MessirveSpaceRaceGame
+		              playedBy: { 'Messi' }
+		              on: aBoard
+		              rolling: aLoadedDie
+		              withLapsToWin: 2
+		              handing: deck.
+	
+	aSpaceGame playNextTurn.
+	aSpaceGame spaceShip: 'Messi' plays: overloadCard on: 'Messi'.
+	aSpaceGame spaceShip: 'Messi' plays: speedBoost on: overloadCard.
+	aSpaceGame playNextTurn.
+
+	self
+		assert: 'Messi'
+		isAt: 9
+		with: 1
+		in: aSpaceGame
+]
+
+{ #category : #tests }
 CardTests >> testASpaceShipPlaysSpeedBoostOnASpeedCardAndAdvancesTwoSpaces [
 
 	| aSpaceGame aLoadedDie aBoard speedCard deck speedBoost|
@@ -1024,6 +1089,48 @@ CardTests >> testASpaceShipPlaysSpeedBoostOnASpeedCardAndAdvancesTwoSpaces [
 
 	self
 		assert: 'Messi'
+		isAt: 5
+		with: 1
+		in: aSpaceGame
+]
+
+{ #category : #tests }
+CardTests >> testASpaceShipPlaysSpeedBoostOnAccelerationCardAndBothSpaceShipsGetBoostedByTwo [
+
+	| aSpaceGame aLoadedDie aBoard accelerationCard deck speedBoost |
+	aLoadedDie := LoadedDie rolling: { 2 }.
+	accelerationCard := AccelerationCard new.
+	speedBoost := SpeedBoostCard new.
+	deck := InfiniteDeck madeOf: { 
+			        accelerationCard.
+			        speedBoost.
+			        accelerationCard.
+			        speedBoost }.
+	aBoard := RoundBoard
+		          withOnly: { (CardDealerEffect handingFrom: deck) }
+		          at: { 3 }
+		          Of: 100.
+	aSpaceGame := MessirveSpaceRaceGame
+		              playedBy: { 'Messi'. 'Armani' }
+		              on: aBoard
+		              rolling: aLoadedDie
+		              withLapsToWin: 2
+		              handing: deck.
+
+	aSpaceGame spaceShip: 'Messi' plays: accelerationCard on: aSpaceGame.
+	aSpaceGame spaceShip: 'Armani' plays: speedBoost on: accelerationCard.
+	aSpaceGame playNextTurn.
+
+	self
+		assert: 'Messi'
+		isAt: 5
+		with: 1
+		in: aSpaceGame.
+
+	aSpaceGame playNextTurn.
+
+	self
+		assert: 'Armani'
 		isAt: 5
 		with: 1
 		in: aSpaceGame
