@@ -9,8 +9,16 @@ Class {
 }
 
 { #category : #initialization }
-DeckHolder class >> formedBy: cards [ 
+DeckHolder class >> assertSizeOf: cards [
 
+	cards size > 0 ifFalse: [ 
+		Error signal: 'DeckHolder must have at least 1 card' ]
+]
+
+{ #category : #initialization }
+DeckHolder class >> formedBy: cards [
+
+	self assertSizeOf: cards.
 	^ self new initializeFormedBy: cards
 ]
 

@@ -63,6 +63,16 @@ LimitedDeckTests >> testADeckOfThreeCardsHandsInTheLastCardAndTheDeckInTheDiscar
 ]
 
 { #category : #tests }
+LimitedDeckTests >> testALimitedDeckCannotHaveLessThanOneCard [
+
+	self
+		should: [ DeckHolder formedBy: {} ]
+		raise: Error
+		whoseDescriptionIncludes: 'DeckHolder must have at least 1 card'
+		description: 'Deck must consist of at least 1 card'
+]
+
+{ #category : #tests }
 LimitedDeckTests >> testAcardDealerEffectDoesNotHandInAnyCardsBecauseDeckHolderIsEmpty [
 
 	| aSpaceGame aLoadedDie aBoard speedCard cancellationCard limitedDeck |
@@ -82,13 +92,12 @@ LimitedDeckTests >> testAcardDealerEffectDoesNotHandInAnyCardsBecauseDeckHolderI
 		              rolling: aLoadedDie
 		              withLapsToWin: 2
 		              handing: limitedDeck.
-	
-		self
+
+	self
 		should: [ aSpaceGame playNextTurn ]
 		raise: Error
 		whoseDescriptionIncludes: 'No cards available to pick up'
 		description: 'No cards available to pick up'
-	
 ]
 
 { #category : #tests }
