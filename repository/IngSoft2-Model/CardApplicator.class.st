@@ -35,16 +35,6 @@ CardApplicator >> applyAllNegatedCardsOf: aCard [
 ]
 
 { #category : #'as yet unclassified' }
-CardApplicator >> applyDoubledCardsOf: aCard [ 
-
-	inventories do: [ :inventory | self applyDoubleOf: aCard from: inventory ].
-
-	globalInventory do: [ :card | 
-		card = aCard ifTrue: [ 
-			aCard applyDoubledOn: card on: engineApplicator from: self ] ]
-]
-
-{ #category : #'as yet unclassified' }
 CardApplicator >> applyDoubledCardsOf: aCard from: aGame [
 
 	inventories do: [ :inventory | 
